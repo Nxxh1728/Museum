@@ -16,9 +16,10 @@ public class Museum extends JPanel {
     private Canvas3D canvas;
     private TransformGroup viewTransform;
     private Transform3D viewTM = new Transform3D();
-    private Point3d camera = new Point3d(15, 15, 20);
-    private Point3d centerPoint = new Point3d(0, 0.5, 0);
+    private Point3d camera = new Point3d(3, 1, 0);
+    private Point3d centerPoint = new Point3d(0, 1, 0);
     private Vector3d upDir = new Vector3d(0, 1, 0);
+    private Movement movement;
 
     public Museum() {
         GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
@@ -35,6 +36,10 @@ public class Museum extends JPanel {
         setLayout(new BorderLayout());
         add("Center", canvas);
         
+        movement = new Movement(this, camera, centerPoint);
+        canvas.addKeyListener(movement);
+        new Thread(movement).start();
+        
         updateViewer();
     }
 
@@ -42,7 +47,6 @@ public class Museum extends JPanel {
         BranchGroup sceneBG = new BranchGroup();
         sceneBG.addChild(GameObjects.createFloor());
         sceneBG.addChild(GameObjects.createWalls());
-
         return sceneBG;
     }
 
@@ -54,10 +58,12 @@ public class Museum extends JPanel {
 
     public static void main(String[] args) {
         frame = new JFrame("3D Museum");
-        frame.getContentPane().add(new Museum());
+        Museum museum = new Museum();
+        frame.getContentPane().add(museum);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1200, 800);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.addKeyListener(museum.movement);
     }
 }
