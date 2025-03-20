@@ -16,8 +16,8 @@ public class Museum extends JPanel {
     private Canvas3D canvas;
     private TransformGroup viewTransform;
     private Transform3D viewTM = new Transform3D();
-    private Point3d camera = new Point3d(3, 1, 0);
-    private Point3d centerPoint = new Point3d(0, 1, 0);
+    private Point3d camera = new Point3d(1, .25, 0);
+    private Point3d centerPoint = new Point3d(0, .25, 0);
     private Vector3d upDir = new Vector3d(0, 1, 0);
     private Movement movement;
 

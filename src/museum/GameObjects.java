@@ -115,7 +115,8 @@ public class GameObjects {
             new Color3f(1.0f, 0.0f, 1.0f)  
         };
 
-        // Create first floor section
+        
+        //back wall
         Transform3D transform1 = new Transform3D();
         transform1.setTranslation(new Vector3f(-5.0f, 1f, .0f));
         TransformGroup walltg1 = new TransformGroup(transform1);
@@ -124,13 +125,32 @@ public class GameObjects {
         walltg.addChild(walltg1);
         
         
-        
+        //front entrance walls
         Transform3D transform2 = new Transform3D();
-        transform2.setTranslation(new Vector3f(3.0f, 1f, 0.0f));
+        transform2.setTranslation(new Vector3f(3.0f, 1.5f, 0.0f));
         TransformGroup walltg2 = new TransformGroup(transform2);
-        Box box2 = new Box(.1f, 1f, 6f, Primitive.GENERATE_NORMALS, walls);
+        Box box2 = new Box(.1f, .5f, 6f, Primitive.GENERATE_NORMALS, walls);
         walltg2.addChild(box2);
         walltg.addChild(walltg2);
+        
+        
+        Transform3D transform21 = new Transform3D();
+        transform21.setTranslation(new Vector3f(3.0f, .5f, 3.5f));
+        TransformGroup walltg21 = new TransformGroup(transform21);
+        Box box21 = new Box(.1f, .5f, 3f, Primitive.GENERATE_NORMALS, walls);
+        walltg21.addChild(box21);
+        walltg.addChild(walltg21);
+        
+        Transform3D transform22 = new Transform3D();
+        transform22.setTranslation(new Vector3f(3.0f, .5f, -3.5f));
+        TransformGroup walltg22 = new TransformGroup(transform22);
+        Box box22 = new Box(.1f, .5f, 3f, Primitive.GENERATE_NORMALS, walls);
+        walltg22.addChild(box22);
+        walltg.addChild(walltg22);
+        
+        
+        
+        
         
         
         
@@ -157,7 +177,7 @@ public class GameObjects {
         walltg5.addChild(box5);
         walltg.addChild(walltg5);
 
-        // Create sixth wall section
+        //right outer wall
         Transform3D transform6 = new Transform3D();
         transform6.setTranslation(new Vector3f(-1.0f, 1f, -6.0f));
         TransformGroup walltg6 = new TransformGroup(transform6);
@@ -165,7 +185,7 @@ public class GameObjects {
         walltg6.addChild(box6);
         walltg.addChild(walltg6);
 
-        // Create seventh wall section
+        //left outer wall
         Transform3D transform7 = new Transform3D();
         transform7.setTranslation(new Vector3f(-1.0f, 1f, 6.0f));
         TransformGroup walltg7 = new TransformGroup(transform7);
@@ -175,7 +195,7 @@ public class GameObjects {
         
         
         
-        
+        //right room seperater
         Transform3D transform8 = new Transform3D();
         transform8.setTranslation(new Vector3f(-1f, 1f, -4.0f));
         TransformGroup walltg8 = new TransformGroup(transform8);
@@ -185,7 +205,7 @@ public class GameObjects {
         
         
         
-        
+        //left room seperator
         Transform3D transform9 = new Transform3D();
         transform9.setTranslation(new Vector3f(-1f, 1f, 4.0f));
         TransformGroup walltg9 = new TransformGroup(transform9);
