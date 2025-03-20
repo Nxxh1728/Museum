@@ -2,6 +2,8 @@ package museum;
 
 import java.awt.BorderLayout;
 import java.awt.GraphicsConfiguration;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.jogamp.java3d.*;
@@ -36,7 +38,12 @@ public class Museum extends JPanel {
         setLayout(new BorderLayout());
         add("Center", canvas);
         
-        movement = new Movement(this, camera, centerPoint);
+        // Get wall bounding boxes
+        ArrayList<BoundingBox> walls = GameObjects.getWallBoundingBoxes();
+        
+        // Corrected instantiation with walls
+        movement = new Movement(this, camera, centerPoint, walls);
+        
         canvas.addKeyListener(movement);
         new Thread(movement).start();
         

@@ -1,6 +1,8 @@
 package museum;
 
 
+import java.util.ArrayList;
+
 import org.jogamp.java3d.*;
 import org.jogamp.java3d.utils.geometry.Box;
 import org.jogamp.java3d.utils.geometry.Primitive;
@@ -24,6 +26,8 @@ import org.jogamp.vecmath.Vector3d;
 import org.jogamp.vecmath.Vector3f;
 
 public class GameObjects {
+	
+
 	
 	public static Appearance set_Appearance(String s) {
 		Appearance app = new Appearance();
@@ -153,7 +157,7 @@ public class GameObjects {
         
         
         
-        
+        //back entrance wall
         Transform3D transform3 = new Transform3D();
         transform3.setTranslation(new Vector3f(5.0f, 1f, 0.0f));
         TransformGroup walltg3 = new TransformGroup(transform3);
@@ -161,21 +165,72 @@ public class GameObjects {
         walltg3.addChild(box3);
         walltg.addChild(walltg3);
         
-     // Create fourth wall section
+        
+        
+        
         Transform3D transform4 = new Transform3D();
-        transform4.setTranslation(new Vector3f(0.0f, 1f, 2f));
+        transform4.setTranslation(new Vector3f(0.0f, 1.5f, 2f));
         TransformGroup walltg4 = new TransformGroup(transform4);
-        Box box4 = new Box(5f, 1f, .1f, Primitive.GENERATE_NORMALS, walls);
+        Box box4 = new Box(5f, .5f, .1f, Primitive.GENERATE_NORMALS, walls);
         walltg4.addChild(box4);
         walltg.addChild(walltg4);
+        
+        
+        Transform3D transform41 = new Transform3D();
+        transform41.setTranslation(new Vector3f(-1.0f, .5f, 2f));
+        TransformGroup walltg41 = new TransformGroup(transform41);
+        Box box41 = new Box(1f, .5f, .1f, Primitive.GENERATE_NORMALS, walls);
+        walltg41.addChild(box41);
+        walltg.addChild(walltg41);
+        
+        
+        Transform3D transform42 = new Transform3D();
+        transform42.setTranslation(new Vector3f(-4.0f, .5f, 2f));
+        TransformGroup walltg42 = new TransformGroup(transform42);
+        Box box42 = new Box(1f, .5f, .1f, Primitive.GENERATE_NORMALS, walls);
+        walltg42.addChild(box42);
+        walltg.addChild(walltg42);
 
-        // Create fifth wall section
+        Transform3D transform43 = new Transform3D();
+        transform43.setTranslation(new Vector3f(3.0f, .5f, 2f));
+        TransformGroup walltg43 = new TransformGroup(transform43);
+        Box box43 = new Box(2f, .5f, .1f, Primitive.GENERATE_NORMALS, walls);
+        walltg43.addChild(box43);
+        walltg.addChild(walltg43);
+        
+        
         Transform3D transform5 = new Transform3D();
-        transform5.setTranslation(new Vector3f(0.0f, 1f, -2.0f));
+        transform5.setTranslation(new Vector3f(0.0f, 1.5f, -2f));
         TransformGroup walltg5 = new TransformGroup(transform5);
-        Box box5 = new Box(5f, 1f, .1f, Primitive.GENERATE_NORMALS, walls);
+        Box box5 = new Box(5f, .5f, .1f, Primitive.GENERATE_NORMALS, walls);
         walltg5.addChild(box5);
         walltg.addChild(walltg5);
+        
+        
+        Transform3D transform51 = new Transform3D();
+        transform51.setTranslation(new Vector3f(-1.0f, .5f, -2f));
+        TransformGroup walltg51 = new TransformGroup(transform51);
+        Box box51 = new Box(1f, .5f, .1f, Primitive.GENERATE_NORMALS, walls);
+        walltg51.addChild(box51);
+        walltg.addChild(walltg51);
+        
+        
+        Transform3D transform52 = new Transform3D();
+        transform52.setTranslation(new Vector3f(-4.0f, .5f, -2f));
+        TransformGroup walltg52 = new TransformGroup(transform52);
+        Box box52 = new Box(1f, .5f, .1f, Primitive.GENERATE_NORMALS, walls);
+        walltg52.addChild(box52);
+        walltg.addChild(walltg52);
+
+        Transform3D transform53 = new Transform3D();
+        transform53.setTranslation(new Vector3f(3.0f, .5f, -2f));
+        TransformGroup walltg53 = new TransformGroup(transform53);
+        Box box53 = new Box(2f, .5f, .1f, Primitive.GENERATE_NORMALS, walls);
+        walltg53.addChild(box53);
+        walltg.addChild(walltg53);
+        
+        
+        
 
         //right outer wall
         Transform3D transform6 = new Transform3D();
@@ -215,4 +270,18 @@ public class GameObjects {
 
         return walltg;
     }
+    
+    
+	public static ArrayList<BoundingBox> getWallBoundingBoxes() {
+	    ArrayList<BoundingBox> walls = new ArrayList<>();
+	    
+	    // Example: Define bounding boxes based on wall positions
+	    walls.add(new BoundingBox(-5.0, 0.1, 0.0, 6.0)); // Back wall
+	    walls.add(new BoundingBox(3.0, 0.1, 6.0, 3.0));  // Front entrance walls
+	    walls.add(new BoundingBox(3.0, 0.1, -6.0, 3.0)); // Front entrance walls
+	    walls.add(new BoundingBox(-1.0, 4.0, -6.0, 0.1)); // Right outer wall
+	    walls.add(new BoundingBox(-1.0, 4.0, 6.0, 0.1));  // Left outer wall
+
+	    return walls;
+	}
 }

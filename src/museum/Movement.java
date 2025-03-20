@@ -1,8 +1,8 @@
 package museum;
 
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import org.jogamp.vecmath.*;
 
 
@@ -12,17 +12,16 @@ public class Movement implements KeyListener, Runnable {
     private Point3d centerPoint;
     private double direction;
     private boolean left = false, right = false, up = false, down = false;
-    private boolean jumping = false;
     private final double MOVE_SPEED = 0.15;
     private final double ROTATION_SPEED = 5.0;
-    private final double JUMP_HEIGHT = 0.5;
-    private final double GROUND_LEVEL = 0.4;
+    private ArrayList<BoundingBox> walls;
 
-    public Movement(Museum museum, Point3d camera, Point3d centerPoint) {
+    public Movement(Museum museum, Point3d camera, Point3d centerPoint, ArrayList<BoundingBox> walls) {
         this.museum = museum;
         this.camera = camera;
         this.centerPoint = centerPoint;
         this.direction = 0;
+        this.walls = walls;
     }
 
     @Override
@@ -46,43 +45,35 @@ public class Movement implements KeyListener, Runnable {
         double dx = Math.cos(theta) * MOVE_SPEED;
         double dz = Math.sin(theta) * MOVE_SPEED;
 
-        double camDX = zAxis * dx - xAxis * dz;
-        double camDZ = zAxis * dz + xAxis * dx;
+        double newCamX = camera.x + zAxis * dx - xAxis * dz;
+        double newCamZ = camera.z + zAxis * dz + xAxis * dx;
 
-        camera.x += camDX;
-        camera.z += camDZ;
-        centerPoint.x += camDX;
-        centerPoint.z += camDZ;
+        if (!isColliding(newCamX, newCamZ)) {
+            camera.x = newCamX;
+            camera.z = newCamZ;
+            centerPoint.x += zAxis * dx - xAxis * dz;
+            centerPoint.z += zAxis * dz + xAxis * dx;
+            museum.updateViewer();
+        }
+    }
 
-        museum.updateViewer();
+    private boolean isColliding(double x, double z) {
+        for (BoundingBox wall : walls) {
+            if (wall.contains(x, z)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void turn(int magnitude) {
         direction = (direction + magnitude * ROTATION_SPEED) % 360.0;
         double theta = Math.toRadians(direction);
+
         centerPoint.x = camera.x + Math.cos(theta);
         centerPoint.z = camera.z + Math.sin(theta);
-        museum.updateViewer();
-    }
 
-    private void jump() {
-        if (!jumping) {
-            jumping = true;
-            new Thread(() -> {
-                try {
-                    camera.y += JUMP_HEIGHT;
-                    centerPoint.y += JUMP_HEIGHT;
-                    museum.updateViewer();
-                    Thread.sleep(200);
-                    camera.y = GROUND_LEVEL;
-                    centerPoint.y = GROUND_LEVEL + 0.1;
-                    museum.updateViewer();
-                    jumping = false;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }).start();
-        }
+        museum.updateViewer();
     }
 
     @Override
@@ -107,9 +98,6 @@ public class Movement implements KeyListener, Runnable {
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_E:
                 turn(1);
-                break;
-            case KeyEvent.VK_SPACE:
-                jump();
                 break;
         }
     }
