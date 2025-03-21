@@ -18,8 +18,8 @@ public class Museum extends JPanel {
     private Canvas3D canvas;
     private TransformGroup viewTransform;
     private Transform3D viewTM = new Transform3D();
-    private Point3d camera = new Point3d(1, .25, 0);
-    private Point3d centerPoint = new Point3d(0, .25, 0);
+    private Point3d camera = new Point3d(4.5, .25, 0); // Start at X = 4.5
+    private Point3d centerPoint = new Point3d(5, .25, 0); // Look forward along the X-axis
     private Vector3d upDir = new Vector3d(0, 1, 0);
     private Movement movement;
 
@@ -56,7 +56,29 @@ public class Museum extends JPanel {
         sceneBG.addChild(GameObjects.createWalls());
         
         sceneBG.addChild(TicketRoom.createTicketRoom());
+
+        // Add lighting to the scene
+        addLighting(sceneBG);
+
         return sceneBG;
+    }
+
+    private void addLighting(BranchGroup sceneBG) {
+        // Create a bounding leaf for the light to affect the entire scene
+        BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 100.0);
+
+        // Create an ambient light
+        AmbientLight ambientLight = new AmbientLight(new Color3f(1.0f, 1.0f, 1.0f));
+        ambientLight.setInfluencingBounds(bounds);
+        sceneBG.addChild(ambientLight);
+
+        // Create a directional light
+        DirectionalLight directionalLight = new DirectionalLight(
+            new Color3f(1.0f, 1.0f, 1.0f), // Color of the light
+            new Vector3f(-1.0f, -1.0f, -1.0f) // Direction of the light
+        );
+        directionalLight.setInfluencingBounds(bounds);
+        sceneBG.addChild(directionalLight);
     }
 
     public void updateViewer() {

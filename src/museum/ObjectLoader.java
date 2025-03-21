@@ -21,24 +21,29 @@ public class ObjectLoader {
         String filePath = "objects/" + fileName;
 
         // Load the object file with materials
-        int flags = ObjectFile.RESIZE | ObjectFile.LOAD_ALL;
+        int flags = ObjectFile.RESIZE | ObjectFile.LOAD_ALL | ObjectFile.TRIANGULATE;
         ObjectFile objFile = new ObjectFile(flags);
         Scene scene = null;
         try {
             scene = objFile.load(filePath);
         } catch (FileNotFoundException e) {
-            System.err.println(e);
+            System.err.println("File not found: " + filePath);
             System.exit(1);
         } catch (ParsingErrorException e) {
-            System.err.println(e);
+            System.err.println("Parsing error: " + e.getMessage());
             System.exit(1);
         } catch (IncorrectFormatException e) {
-            System.err.println(e);
+            System.err.println("Incorrect format: " + e.getMessage());
             System.exit(1);
         }
 
         if (scene != null) {
             BranchGroup loadedObject = scene.getSceneGroup();
+
+            // Debug: Print out material names
+            if (loadedObject.getUserData() != null) {
+                System.out.println("Loaded object with user data: " + loadedObject.getUserData());
+            }
 
             // Create a TransformGroup to position and scale the object
             Transform3D transform3D = new Transform3D();
@@ -48,6 +53,8 @@ public class ObjectLoader {
             transformGroup.addChild(loadedObject);
 
             objectGroup.addChild(transformGroup);
+        } else {
+            System.err.println("Failed to load scene from file: " + filePath);
         }
 
         return objectGroup;

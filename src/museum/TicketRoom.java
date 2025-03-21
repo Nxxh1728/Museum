@@ -14,7 +14,7 @@ public class TicketRoom {
         float plantScale = 0.35f; // Adjust scale as needed
         
         // Load the plant object
-        BranchGroup plant = ObjectLoader.loadObject("indoor_plant_02.obj", plantPosition, plantScale);
+        BranchGroup plant = ObjectLoader.loadObject("Palm_01.obj", plantPosition, plantScale);
         
         // Add the plant to the ticket room group
         ticketRoomGroup.addChild(plant);
