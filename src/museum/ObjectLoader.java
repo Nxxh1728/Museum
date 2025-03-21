@@ -20,21 +20,22 @@ public class ObjectLoader {
         // Construct the full path to the object file
         String filePath = "objects/" + fileName;
 
-        // Load the object file
-        ObjectFile objFile = new ObjectFile(ObjectFile.RESIZE);
+        // Load the object file with materials
+        int flags = ObjectFile.RESIZE | ObjectFile.LOAD_ALL;
+        ObjectFile objFile = new ObjectFile(flags);
         Scene scene = null;
         try {
             scene = objFile.load(filePath);
-		} catch (FileNotFoundException e) {
-			System.err.println(e);
-			System.exit(1);
-		} catch (ParsingErrorException e) {
-			System.err.println(e);
-			System.exit(1);
-		} catch (IncorrectFormatException e) {
-			System.err.println(e);
-			System.exit(1);
-		}
+        } catch (FileNotFoundException e) {
+            System.err.println(e);
+            System.exit(1);
+        } catch (ParsingErrorException e) {
+            System.err.println(e);
+            System.exit(1);
+        } catch (IncorrectFormatException e) {
+            System.err.println(e);
+            System.exit(1);
+        }
 
         if (scene != null) {
             BranchGroup loadedObject = scene.getSceneGroup();

@@ -55,10 +55,7 @@ public class Museum extends JPanel {
         sceneBG.addChild(GameObjects.createFloor());
         sceneBG.addChild(GameObjects.createWalls());
         
-        Vector3f objectPosition = new Vector3f(0.0f, 0.0f, 0.0f); // Position of the object
-        float objectScale = 1.0f; // Scale of the object
-        BranchGroup loadedObject = ObjectLoader.loadObject("FanBlades.obj", objectPosition, objectScale);
-        sceneBG.addChild(loadedObject);
+        sceneBG.addChild(TicketRoom.createTicketRoom());
         return sceneBG;
     }
 
