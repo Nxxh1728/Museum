@@ -74,13 +74,6 @@ public class GameObjects {
    
         TransformGroup tg = new TransformGroup();
 
-        // Colors for each floor section
-        Color3f[] colors = {
-            new Color3f(1.0f, 0.0f, 0.0f), // Red
-            new Color3f(0.0f, 1.0f, 0.0f), // Green
-            new Color3f(0.0f, 0.0f, 1.0f)  // Blue
-        };
-
         // Create first floor section
         Transform3D transform1 = new Transform3D();
         transform1.setTranslation(new Vector3f(0.0f, 0.0f, 0.0f));
@@ -111,13 +104,6 @@ public class GameObjects {
 
     public static TransformGroup createWalls() {
         TransformGroup walltg = new TransformGroup();
-
-        // Colors for each floor section
-        Color3f[] colors = {
-            new Color3f(1.0f, 1.0f, 0.0f),
-            new Color3f(0.0f, 1.0f, 1.0f), 
-            new Color3f(1.0f, 0.0f, 1.0f)  
-        };
 
         
         //back wall
@@ -277,8 +263,8 @@ public class GameObjects {
 	    
 	    // Example: Define bounding boxes based on wall positions
 	    walls.add(new BoundingBox(-5.0, 0.1, 0.0, 6.0)); // Back wall
-	    walls.add(new BoundingBox(3.0, 0.1, 6.0, 3.0));  // Front entrance walls
-	    walls.add(new BoundingBox(3.0, 0.1, -6.0, 3.0)); // Front entrance walls
+	    walls.add(new BoundingBox(3.0, 0.1, 4.5, 4.0));  // Front entrance walls
+	    walls.add(new BoundingBox(3.0, 0.1, -4.5, 4.0)); // Front entrance walls
 	    walls.add(new BoundingBox(-1.0, 4.0, -6.0, 0.1)); // Right outer wall
 	    walls.add(new BoundingBox(-1.0, 4.0, 6.0, 0.1));  // Left outer wall
 

@@ -4,6 +4,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="images"/>
 	<classpathentry kind="src" path="sounds"/>
+	<classpathentry kind="src" path="objects"/>
 	<classpathentry kind="lib" path="C:/jars4java3d/gluegen-rt.jar"/>
 	<classpathentry kind="lib" path="C:/jars4java3d/java3d-core.jar"/>
 	<classpathentry kind="lib" path="C:/jars4java3d/java3d-examples.jar"/>

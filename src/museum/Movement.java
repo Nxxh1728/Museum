@@ -12,7 +12,7 @@ public class Movement implements KeyListener, Runnable {
     private Point3d centerPoint;
     private double direction;
     private boolean left = false, right = false, up = false, down = false;
-    private final double MOVE_SPEED = 0.15;
+    private final double MOVE_SPEED = 0.05;
     private final double ROTATION_SPEED = 5.0;
     private ArrayList<BoundingBox> walls;
 

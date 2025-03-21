@@ -1,5 +1,7 @@
 package museum;
 
+
+//this class is a constructor to add a barrier to the walls so the player can't go through
 public class BoundingBox {
     private double minX, maxX, minZ, maxZ;
 
