@@ -152,32 +152,70 @@ public class GameObjects {
         walltg.addChild(createWall(new Vector3f(-1f, 1f, 4.0f), new Vector3f(0.1f, 1f, 2f), walls));
 
         
-        Vector3f trimPosition = new Vector3f(0f, 0.2f, 0f); // Adjust position as needed
-        float trimScale = .5f; // Adjust scale as needed
-        
-        // Load the plant object
-        BranchGroup trim = ObjectLoader.loadObject("Architectural_Pillar.obj", trimPosition, trimScale);
-        
-        // Add the plant to the ticket room group
-        walltg.addChild(trim);
-        
+     // Create and add multiple doors with custom rotations
+        Vector3f[] doorPositions = {
+            new Vector3f(0.5f, 0f, -1.8f), // Position 1
+            new Vector3f(-2.5f, 0f, -1.8f), // Position 2
+            new Vector3f(2.5f, 0f, -1.8f),  // Position 3
+            new Vector3f(-.5f, 0f, -1.8f),  // Position 4
+            new Vector3f(0f, 0f, -2.8f)   // Position 5
+        };
+
+        float[] doorRotations = { 0, 0, 180, 180, 270}; // Rotation angles for each door (in degrees)
+
+        float doorScale = 1f; // Adjust scale as needed
+
+        for (int i = 0; i < doorPositions.length; i++) {
+            BranchGroup door = createDoor(doorPositions[i], doorScale, doorRotations[i]);
+            walltg.addChild(door);
+        }
+
         return walltg;
+}
+    private static BranchGroup createDoor(Vector3f position, float scale, float rotationAngle) {
+        BranchGroup doorGroup = new BranchGroup();
+
+        // Load the door object
+        BranchGroup door = ObjectLoader.loadObject("door.obj", position, scale);
+
+        // Apply rotation if rotationAngle is not zero
+        if (rotationAngle != 0) {
+            Transform3D rotationTransform = new Transform3D();
+            rotationTransform.setRotation(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(rotationAngle))); // Rotate around Y-axis
+            TransformGroup rotationGroup = new TransformGroup(rotationTransform);
+            rotationGroup.addChild(door);
+            doorGroup.addChild(rotationGroup);
+        } else {
+            doorGroup.addChild(door);
+        }
+
+        return doorGroup;
     }
     
     
 	public static ArrayList<BoundingBox> getWallBoundingBoxes() {
 	    ArrayList<BoundingBox> walls = new ArrayList<>();
 	    
-	    // Example: Define bounding boxes based on wall positions
+	   
 	    walls.add(new BoundingBox(-5.0, 0.1, 0.0, 6.0)); // Back wall
 	    walls.add(new BoundingBox(3.0, 0.1, 4.5, 4.0));  // Front entrance walls
 	    walls.add(new BoundingBox(3.0, 0.1, -4.5, 4.0)); // Front entrance walls
+	    walls.add(new BoundingBox(5.0, 0.1, 0.0, 3.0)); //entrance back wall
 	    walls.add(new BoundingBox(-1.0, 4.0, -6.0, 0.1)); // Right outer wall
 	    walls.add(new BoundingBox(-1.0, 4.0, 6.0, 0.1));  // Left outer wall
 	    
-	    walls.add(new BoundingBox(5.0, 0.1, 0.0, 3.0)); 
+	    //inner right walls
+	    walls.add(new BoundingBox(-4, 1, -2.0, 0.1)); 
+	    walls.add(new BoundingBox(-1., 1.0, -2.0, 0.1));
+	    walls.add(new BoundingBox(3, 2.0, -2.0, 0.1));
 	    
-	    walls.add(new BoundingBox(0.0, 0.0, .2));
+	    //inner left walls
+	    walls.add(new BoundingBox(-4, 1, 2.0, 0.1)); 
+	    walls.add(new BoundingBox(-1., 1.0, 2.0, 0.1));
+	    walls.add(new BoundingBox(3, 2.0, 2.0, 0.1));
+	   
+	    
+	    //walls.add(new BoundingBox(0.0, 0.0, .2));
 
 	    return walls;
 	}
