@@ -15,7 +15,26 @@ import org.jogamp.vecmath.Vector3f;
 
 public class GameObjects {
 	
+	public static Appearance set_Appearance(Color3f color) {
+	    Appearance app = new Appearance();
+	    
+	    // Set polygon attributes to show both sides
+	    PolygonAttributes pa = new PolygonAttributes();
+	    pa.setCullFace(PolygonAttributes.CULL_NONE); // show both sides
+	    app.setPolygonAttributes(pa);
 
+	    // Create a Material object with the specified color
+	    Material material = new Material();
+	    material.setDiffuseColor(color);
+	    material.setSpecularColor(new Color3f(0.7f, 0.7f, 0.7f)); // Optional: Set specular color
+	    material.setShininess(64.0f); // Optional: Set shininess
+	    material.setLightingEnable(true); // Ensure lighting is enabled
+
+	    // Enable lighting and set the material
+	    app.setMaterial(material);
+
+	    return app;
+	}
 	
 	public static Appearance set_Appearance(String s) {
 		Appearance app = new Appearance();
@@ -55,7 +74,11 @@ public class GameObjects {
 		return texture;
 	}
 	
-	static Appearance walls = set_Appearance("Wall");
+    static Color3f palePurple = new Color3f(0.7f, 0.6f, 1.0f);
+
+    //static Appearance walls = set_Appearance(palePurple);
+	
+	static Appearance walls = set_Appearance("wall3");
 	static Appearance floor = set_Appearance("floor");
 	
 	// Helper function to create a wall
@@ -129,11 +152,11 @@ public class GameObjects {
         walltg.addChild(createWall(new Vector3f(-1f, 1f, 4.0f), new Vector3f(0.1f, 1f, 2f), walls));
 
         
-        Vector3f trimPosition = new Vector3f(0f, 0.55f, 0f); // Adjust position as needed
-        float trimScale = 0.2f; // Adjust scale as needed
+        Vector3f trimPosition = new Vector3f(0f, 0.2f, 0f); // Adjust position as needed
+        float trimScale = .5f; // Adjust scale as needed
         
         // Load the plant object
-        BranchGroup trim = ObjectLoader.loadObject("toptrim.obj", trimPosition, trimScale);
+        BranchGroup trim = ObjectLoader.loadObject("Architectural_Pillar.obj", trimPosition, trimScale);
         
         // Add the plant to the ticket room group
         walltg.addChild(trim);
