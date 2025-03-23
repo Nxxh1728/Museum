@@ -176,6 +176,8 @@ public class GameObjects {
 	    walls.add(new BoundingBox(-1.0, 4.0, 6.0, 0.1));  // Left outer wall
 	    
 	    walls.add(new BoundingBox(5.0, 0.1, 0.0, 3.0)); 
+	    
+	    walls.add(new BoundingBox(0.0, 0.0, .2));
 
 	    return walls;
 	}
