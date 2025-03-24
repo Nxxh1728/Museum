@@ -44,7 +44,12 @@ public class Museum extends JPanel {
         // Corrected instantiation with walls
         movement = new Movement(this, camera, centerPoint, walls);
         
+        // Add key listener as before
         canvas.addKeyListener(movement);
+        
+        // Enable mouse control on the canvas
+        movement.enableMouseControl(canvas);
+        
         new Thread(movement).start();
         
         updateViewer();

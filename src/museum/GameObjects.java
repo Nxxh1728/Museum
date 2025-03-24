@@ -176,7 +176,7 @@ public class GameObjects {
         BranchGroup doorGroup = new BranchGroup();
 
         // Load the door object
-        BranchGroup door = ObjectLoader.loadObject("door.obj", position, scale);
+        BranchGroup door = ObjectLoader.loadObject("door1.obj", position, scale);
 
         // Apply rotation if rotationAngle is not zero
         if (rotationAngle != 0) {
