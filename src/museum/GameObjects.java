@@ -162,7 +162,6 @@ public class GameObjects {
         };
 
         float[] doorRotations = { 0, 0, 180, 180, 270}; // Rotation angles for each door (in degrees)
-
         float doorScale = 1f; // Adjust scale as needed
 
         for (int i = 0; i < doorPositions.length; i++) {
@@ -170,8 +169,129 @@ public class GameObjects {
             walltg.addChild(door);
         }
 
+        BranchGroup baseboard = createBaseboard(new Vector3f(0f, 0.4f, -4.86f), .6f, 90f);
+        walltg.addChild(baseboard);
+        
+        BranchGroup baseboard2 = createBaseboard(new Vector3f(1.2f, 0.4f, -4.86f), .6f, 90f);
+        walltg.addChild(baseboard2);
+        
+        BranchGroup baseboard3 = createBaseboard(new Vector3f(-1.2f, 0.4f, -4.86f), .6f, 90f);
+        walltg.addChild(baseboard3);
+
+        // back wall
+        BranchGroup toptrim = createToptrim(new Vector3f(0f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim);
+        BranchGroup toptrim2 = createToptrim(new Vector3f(-.4f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim2);
+        BranchGroup toptrim3 = createToptrim(new Vector3f(.4f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim3);
+        BranchGroup toptrim4 = createToptrim(new Vector3f(-.8f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim4);
+        BranchGroup toptrim5 = createToptrim(new Vector3f(.8f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim5);
+        BranchGroup toptrim6 = createToptrim(new Vector3f(-1.2f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim6);
+        BranchGroup toptrim7 = createToptrim(new Vector3f(1.2f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim7);
+        BranchGroup toptrim8 = createToptrim(new Vector3f(-1.6f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim8);
+        BranchGroup toptrim9 = createToptrim(new Vector3f(1.6f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim9);
+        BranchGroup toptrim10 = createToptrim(new Vector3f(-2f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim10);
+        BranchGroup toptrim11 = createToptrim(new Vector3f(2f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim11);
+        
+        BranchGroup toptrimA1 = createToptrim(new Vector3f(-5f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA1);
+
+        BranchGroup toptrimA2 = createToptrim(new Vector3f(-4.6f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA2);
+
+        BranchGroup toptrimA3 = createToptrim(new Vector3f(-4.2f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA3);
+
+        BranchGroup toptrimA4 = createToptrim(new Vector3f(-3.8f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA4);
+
+        BranchGroup toptrimA5 = createToptrim(new Vector3f(-3.4f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA5);
+
+        BranchGroup toptrimA6 = createToptrim(new Vector3f(-3f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA6);
+
+        BranchGroup toptrimA7 = createToptrim(new Vector3f(-2.6f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA7);
+
+        BranchGroup toptrimA8 = createToptrim(new Vector3f(-2.2f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA8);
+
+        BranchGroup toptrimA9 = createToptrim(new Vector3f(-1.8f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA9);
+
+        BranchGroup toptrimA10 = createToptrim(new Vector3f(-1.4f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA10);
+
+        BranchGroup toptrimA11 = createToptrim(new Vector3f(-1f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA11);
+
+        BranchGroup toptrimA12 = createToptrim(new Vector3f(-0.6f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA12);
+
+        BranchGroup toptrimA13 = createToptrim(new Vector3f(-0.2f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA13);
+
+        BranchGroup toptrimA14 = createToptrim(new Vector3f(0.2f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA14);
+
+        BranchGroup toptrimA15 = createToptrim(new Vector3f(0.6f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA15);
+
+        BranchGroup toptrimA16 = createToptrim(new Vector3f(1f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA16);
+
+        BranchGroup toptrimA17 = createToptrim(new Vector3f(1.4f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA17);
+
+        BranchGroup toptrimA18 = createToptrim(new Vector3f(1.8f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA18);
+
+        BranchGroup toptrimA19 = createToptrim(new Vector3f(2.2f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA19);
+
+        BranchGroup toptrimA20 = createToptrim(new Vector3f(2.6f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA20);
+        
+        BranchGroup toptrimA21 = createToptrim(new Vector3f(3f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA21);
+
+        BranchGroup toptrimA22 = createToptrim(new Vector3f(3.4f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA22);
+
+        BranchGroup toptrimA23 = createToptrim(new Vector3f(3.8f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA23);
+
+        BranchGroup toptrimA24 = createToptrim(new Vector3f(4.2f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA24);
+
+        BranchGroup toptrimA25 = createToptrim(new Vector3f(4.6f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA25);
+
+        BranchGroup toptrimA26 = createToptrim(new Vector3f(5f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA26);
+
+        BranchGroup toptrimA27 = createToptrim(new Vector3f(5.4f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA27);
+
+        BranchGroup toptrimA28 = createToptrim(new Vector3f(5.8f, 1.9f, 1.85f), .2f, 0f);
+        walltg.addChild(toptrimA28);
+        
+
+        
+        
+        
         return walltg;
-}
+    }
     private static BranchGroup createDoor(Vector3f position, float scale, float rotationAngle) {
         BranchGroup doorGroup = new BranchGroup();
 
@@ -191,6 +311,47 @@ public class GameObjects {
 
         return doorGroup;
     }
+    
+    public static BranchGroup createBaseboard(Vector3f position, float scale, float rotationAngle) {
+        BranchGroup baseboardGroup = new BranchGroup();
+
+        // Load the baseboard object
+        BranchGroup baseboard = ObjectLoader.loadObject("WAINSCOT_PANEL_SOLID.obj", position, scale);
+
+        // Apply rotation if rotationAngle is not zero
+        if (rotationAngle != 0) {
+            Transform3D rotationTransform = new Transform3D();
+            rotationTransform.setRotation(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(rotationAngle))); // Rotate around Y-axis
+            TransformGroup rotationGroup = new TransformGroup(rotationTransform);
+            rotationGroup.addChild(baseboard);
+            baseboardGroup.addChild(rotationGroup);
+        } else {
+            baseboardGroup.addChild(baseboard);
+        }
+
+        return baseboardGroup;
+    }
+
+    public static BranchGroup createToptrim(Vector3f position, float scale, float rotationAngle) {
+        BranchGroup toptrimGroup = new BranchGroup();
+
+        // Load the toptrim object
+        BranchGroup toptrim = ObjectLoader.loadObject("toptrim.obj", position, scale);
+
+        // Apply rotation if rotationAngle is not zero
+        if (rotationAngle != 0) {
+            Transform3D rotationTransform = new Transform3D();
+            rotationTransform.setRotation(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(rotationAngle))); // Rotate around Y-axis
+            TransformGroup rotationGroup = new TransformGroup(rotationTransform);
+            rotationGroup.addChild(toptrim);
+            toptrimGroup.addChild(rotationGroup);
+        } else {
+            toptrimGroup.addChild(toptrim);
+        }
+
+        return toptrimGroup;
+    }
+    
     
     
 	public static ArrayList<BoundingBox> getWallBoundingBoxes() {
