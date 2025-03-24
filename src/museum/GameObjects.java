@@ -171,12 +171,26 @@ public class GameObjects {
 
         BranchGroup baseboard = createBaseboard(new Vector3f(0f, 0.4f, -4.86f), .6f, 90f);
         walltg.addChild(baseboard);
-        
         BranchGroup baseboard2 = createBaseboard(new Vector3f(1.2f, 0.4f, -4.86f), .6f, 90f);
         walltg.addChild(baseboard2);
-        
         BranchGroup baseboard3 = createBaseboard(new Vector3f(-1.2f, 0.4f, -4.86f), .6f, 90f);
         walltg.addChild(baseboard3);
+        BranchGroup baseboard4 = createBaseboard(new Vector3f(2.4f, 0.4f, -4.86f), .6f, 90f);
+        walltg.addChild(baseboard4);
+        BranchGroup baseboard5 = createBaseboard(new Vector3f(-2.4f, 0.4f, -4.86f), .6f, 90f);
+        walltg.addChild(baseboard5);
+        BranchGroup baseboard6 = createBaseboard(new Vector3f(3.6f, 0.4f, -4.86f), .6f, 90f);
+        walltg.addChild(baseboard6);
+        BranchGroup baseboard7 = createBaseboard(new Vector3f(-3.6f, 0.4f, -4.86f), .6f, 90f);
+        walltg.addChild(baseboard7);
+        BranchGroup baseboard8 = createBaseboard(new Vector3f(4.8f, 0.4f, -4.86f), .6f, 90f);
+        walltg.addChild(baseboard8);
+        BranchGroup baseboard9 = createBaseboard(new Vector3f(-4.8f, 0.4f, -4.86f), .6f, 90f);
+        walltg.addChild(baseboard9);
+        BranchGroup baseboard10 = createBaseboard(new Vector3f(6.0f, 0.4f, -4.86f), .6f, 90f);
+        walltg.addChild(baseboard10);
+        BranchGroup baseboard11 = createBaseboard(new Vector3f(-6.0f, 0.4f, -4.86f), .6f, 90f);
+        walltg.addChild(baseboard11);
 
         // back wall
         BranchGroup toptrim = createToptrim(new Vector3f(0f, 1.9f, 4.85f), .2f, 270f);
@@ -201,176 +215,339 @@ public class GameObjects {
         walltg.addChild(toptrim10);
         BranchGroup toptrim11 = createToptrim(new Vector3f(2f, 1.9f, 4.85f), .2f, 270f);
         walltg.addChild(toptrim11);
+        BranchGroup toptrim12 = createToptrim(new Vector3f(-2.4f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim12);
+        BranchGroup toptrim13 = createToptrim(new Vector3f(2.4f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim13);
+        BranchGroup toptrim14 = createToptrim(new Vector3f(-2.8f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim14);
+        BranchGroup toptrim15 = createToptrim(new Vector3f(2.8f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim15);
+        BranchGroup toptrim16 = createToptrim(new Vector3f(-3.2f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim16);
+        BranchGroup toptrim17 = createToptrim(new Vector3f(3.2f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim17);
+        BranchGroup toptrim18 = createToptrim(new Vector3f(-3.6f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim18);
+        BranchGroup toptrim19 = createToptrim(new Vector3f(3.6f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim19);
+        BranchGroup toptrim20 = createToptrim(new Vector3f(-4.0f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim20);
+        BranchGroup toptrim21 = createToptrim(new Vector3f(4.0f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim21);
+        BranchGroup toptrim22 = createToptrim(new Vector3f(-4.4f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim22);
+        BranchGroup toptrim23 = createToptrim(new Vector3f(4.4f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim23);
+        BranchGroup toptrim24 = createToptrim(new Vector3f(-4.8f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim24);
+        BranchGroup toptrim25 = createToptrim(new Vector3f(4.8f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim25);
+        BranchGroup toptrim26 = createToptrim(new Vector3f(-5.2f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim26);
+        BranchGroup toptrim27 = createToptrim(new Vector3f(5.2f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim27);
+        BranchGroup toptrim28 = createToptrim(new Vector3f(-5.6f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim28);
+        BranchGroup toptrim29 = createToptrim(new Vector3f(5.6f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim29);
+        BranchGroup toptrim30 = createToptrim(new Vector3f(-6.0f, 1.9f, 4.85f), .2f, 270f);
+        walltg.addChild(toptrim30);
+        
         
         BranchGroup toptrimA1 = createToptrim(new Vector3f(-5f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA1);
-
         BranchGroup toptrimA2 = createToptrim(new Vector3f(-4.6f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA2);
-
         BranchGroup toptrimA3 = createToptrim(new Vector3f(-4.2f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA3);
-
         BranchGroup toptrimA4 = createToptrim(new Vector3f(-3.8f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA4);
-
         BranchGroup toptrimA5 = createToptrim(new Vector3f(-3.4f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA5);
-
         BranchGroup toptrimA6 = createToptrim(new Vector3f(-3f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA6);
-
         BranchGroup toptrimA7 = createToptrim(new Vector3f(-2.6f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA7);
-
         BranchGroup toptrimA8 = createToptrim(new Vector3f(-2.2f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA8);
-
         BranchGroup toptrimA9 = createToptrim(new Vector3f(-1.8f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA9);
-
         BranchGroup toptrimA10 = createToptrim(new Vector3f(-1.4f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA10);
-
         BranchGroup toptrimA11 = createToptrim(new Vector3f(-1f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA11);
-
         BranchGroup toptrimA12 = createToptrim(new Vector3f(-0.6f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA12);
-
         BranchGroup toptrimA13 = createToptrim(new Vector3f(-0.2f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA13);
-
         BranchGroup toptrimA14 = createToptrim(new Vector3f(0.2f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA14);
-
         BranchGroup toptrimA15 = createToptrim(new Vector3f(0.6f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA15);
-
         BranchGroup toptrimA16 = createToptrim(new Vector3f(1f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA16);
-
         BranchGroup toptrimA17 = createToptrim(new Vector3f(1.4f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA17);
-
         BranchGroup toptrimA18 = createToptrim(new Vector3f(1.8f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA18);
-
         BranchGroup toptrimA19 = createToptrim(new Vector3f(2.2f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA19);
-
         BranchGroup toptrimA20 = createToptrim(new Vector3f(2.6f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA20);
-        
         BranchGroup toptrimA21 = createToptrim(new Vector3f(3f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA21);
-
         BranchGroup toptrimA22 = createToptrim(new Vector3f(3.4f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA22);
-
         BranchGroup toptrimA23 = createToptrim(new Vector3f(3.8f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA23);
-
         BranchGroup toptrimA24 = createToptrim(new Vector3f(4.2f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA24);
-
         BranchGroup toptrimA25 = createToptrim(new Vector3f(4.6f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA25);
-
         BranchGroup toptrimA26 = createToptrim(new Vector3f(5f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA26);
-
         BranchGroup toptrimA27 = createToptrim(new Vector3f(5.4f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA27);
-
         BranchGroup toptrimA28 = createToptrim(new Vector3f(5.8f, 1.9f, 1.85f), .2f, 0f);
         walltg.addChild(toptrimA28);
         
         
         BranchGroup toptrimB1 = createToptrim(new Vector3f(5f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB1);
-
         BranchGroup toptrimB2 = createToptrim(new Vector3f(4.6f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB2);
-
         BranchGroup toptrimB3 = createToptrim(new Vector3f(4.2f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB3);
-
         BranchGroup toptrimB4 = createToptrim(new Vector3f(3.8f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB4);
-
         BranchGroup toptrimB5 = createToptrim(new Vector3f(3.4f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB5);
-
         BranchGroup toptrimB6 = createToptrim(new Vector3f(3f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB6);
-
         BranchGroup toptrimB7 = createToptrim(new Vector3f(2.6f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB7);
-
         BranchGroup toptrimB8 = createToptrim(new Vector3f(2.2f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB8);
-
         BranchGroup toptrimB9 = createToptrim(new Vector3f(1.8f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB9);
-
         BranchGroup toptrimB10 = createToptrim(new Vector3f(1.4f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB10);
-
         BranchGroup toptrimB11 = createToptrim(new Vector3f(1f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB11);
-
         BranchGroup toptrimB12 = createToptrim(new Vector3f(0.6f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB12);
-
         BranchGroup toptrimB13 = createToptrim(new Vector3f(0.2f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB13);
-
         BranchGroup toptrimB14 = createToptrim(new Vector3f(-0.2f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB14);
-
         BranchGroup toptrimB15 = createToptrim(new Vector3f(-0.6f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB15);
-
         BranchGroup toptrimB16 = createToptrim(new Vector3f(-1f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB16);
-
         BranchGroup toptrimB17 = createToptrim(new Vector3f(-1.4f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB17);
-
         BranchGroup toptrimB18 = createToptrim(new Vector3f(-1.8f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB18);
-
         BranchGroup toptrimB19 = createToptrim(new Vector3f(-2.2f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB19);
-
         BranchGroup toptrimB20 = createToptrim(new Vector3f(-2.6f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB20);
-
         BranchGroup toptrimB21 = createToptrim(new Vector3f(-3f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB21);
-
         BranchGroup toptrimB22 = createToptrim(new Vector3f(-3.4f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB22);
-
         BranchGroup toptrimB23 = createToptrim(new Vector3f(-3.8f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB23);
-
         BranchGroup toptrimB24 = createToptrim(new Vector3f(-4.2f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB24);
-
         BranchGroup toptrimB25 = createToptrim(new Vector3f(-4.6f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB25);
-
         BranchGroup toptrimB26 = createToptrim(new Vector3f(-5f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB26);
-
         BranchGroup toptrimB27 = createToptrim(new Vector3f(-5.4f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB27);
-
         BranchGroup toptrimB28 = createToptrim(new Vector3f(-5.8f, 1.9f, 1.85f), .2f, 180f);
         walltg.addChild(toptrimB28);
         
+        
+        
+        BranchGroup toptrimC1 = createToptrim(new Vector3f(5f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC1);
+        BranchGroup toptrimC2 = createToptrim(new Vector3f(4.6f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC2);
+        BranchGroup toptrimC3 = createToptrim(new Vector3f(4.2f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC3);
+        BranchGroup toptrimC4 = createToptrim(new Vector3f(3.8f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC4);
+        BranchGroup toptrimC5 = createToptrim(new Vector3f(3.4f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC5);
+        BranchGroup toptrimC6 = createToptrim(new Vector3f(3f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC6);
+        BranchGroup toptrimC7 = createToptrim(new Vector3f(2.6f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC7);
+        BranchGroup toptrimC8 = createToptrim(new Vector3f(2.2f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC8);
+        BranchGroup toptrimC9 = createToptrim(new Vector3f(1.8f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC9);
+        BranchGroup toptrimC10 = createToptrim(new Vector3f(1.4f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC10);
+        BranchGroup toptrimC11 = createToptrim(new Vector3f(1f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC11);
+        BranchGroup toptrimC12 = createToptrim(new Vector3f(0.6f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC12);
+        BranchGroup toptrimC13 = createToptrim(new Vector3f(0.2f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC13);
+        BranchGroup toptrimC14 = createToptrim(new Vector3f(-0.2f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC14);
+        BranchGroup toptrimC15 = createToptrim(new Vector3f(-0.6f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC15);
+        BranchGroup toptrimC16 = createToptrim(new Vector3f(-1f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC16);
+        BranchGroup toptrimC17 = createToptrim(new Vector3f(-1.4f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC17);
+        BranchGroup toptrimC18 = createToptrim(new Vector3f(-1.8f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC18);
+        BranchGroup toptrimC19 = createToptrim(new Vector3f(-2.2f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC19);
+        BranchGroup toptrimC20 = createToptrim(new Vector3f(-2.6f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC20);
+        BranchGroup toptrimC21 = createToptrim(new Vector3f(-3f, 1.9f, 5.85f), .2f, 180f);
+        walltg.addChild(toptrimC21);
+        
+        
+        
+        BranchGroup toptrimD1 = createToptrim(new Vector3f(5f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD1);
+        BranchGroup toptrimD2 = createToptrim(new Vector3f(4.6f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD2);
+        BranchGroup toptrimD3 = createToptrim(new Vector3f(4.2f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD3);
+        BranchGroup toptrimD4 = createToptrim(new Vector3f(3.8f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD4);
+        BranchGroup toptrimD5 = createToptrim(new Vector3f(3.4f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD5);
+        BranchGroup toptrimD6 = createToptrim(new Vector3f(3f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD6);
+        BranchGroup toptrimD7 = createToptrim(new Vector3f(2.6f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD7);
+        BranchGroup toptrimD8 = createToptrim(new Vector3f(2.2f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD8);
+        BranchGroup toptrimD9 = createToptrim(new Vector3f(1.8f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD9);
+        BranchGroup toptrimD10 = createToptrim(new Vector3f(1.4f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD10);
+        BranchGroup toptrimD11 = createToptrim(new Vector3f(1f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD11);
+        BranchGroup toptrimD12 = createToptrim(new Vector3f(0.6f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD12);
+        BranchGroup toptrimD13 = createToptrim(new Vector3f(0.2f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD13);
+        BranchGroup toptrimD14 = createToptrim(new Vector3f(-0.2f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD14);
+        BranchGroup toptrimD15 = createToptrim(new Vector3f(-0.6f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD15);
+        BranchGroup toptrimD16 = createToptrim(new Vector3f(-1f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD16);
+        BranchGroup toptrimD17 = createToptrim(new Vector3f(-1.4f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD17);
+        BranchGroup toptrimD18 = createToptrim(new Vector3f(-1.8f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD18);
+        BranchGroup toptrimD19 = createToptrim(new Vector3f(-2.2f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD19);
+        BranchGroup toptrimD20 = createToptrim(new Vector3f(-2.6f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD20);
+        BranchGroup toptrimD21 = createToptrim(new Vector3f(-3f, 1.9f, -2.15f), .2f, 180f);
+        walltg.addChild(toptrimD21);
+        
+        
+        
+        BranchGroup toptrimE1 = createToptrim(new Vector3f(-5f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE1);
+        BranchGroup toptrimE2 = createToptrim(new Vector3f(-4.6f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE2);
+        BranchGroup toptrimE3 = createToptrim(new Vector3f(-4.2f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE3);
+        BranchGroup toptrimE4 = createToptrim(new Vector3f(-3.8f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE4);
+        BranchGroup toptrimE5 = createToptrim(new Vector3f(-3.4f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE5);
+        BranchGroup toptrimE6 = createToptrim(new Vector3f(-3f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE6);
+        BranchGroup toptrimE7 = createToptrim(new Vector3f(-2.6f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE7);
+        BranchGroup toptrimE8 = createToptrim(new Vector3f(-2.2f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE8);
+        BranchGroup toptrimE9 = createToptrim(new Vector3f(-1.8f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE9);
+        BranchGroup toptrimE10 = createToptrim(new Vector3f(-1.4f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE10);
+        BranchGroup toptrimE11 = createToptrim(new Vector3f(-1f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE11);
+        BranchGroup toptrimE12 = createToptrim(new Vector3f(-0.6f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE12);
+        BranchGroup toptrimE13 = createToptrim(new Vector3f(-0.2f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE13);
+        BranchGroup toptrimE14 = createToptrim(new Vector3f(0.2f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE14);
+        BranchGroup toptrimE15 = createToptrim(new Vector3f(0.6f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE15);
+        BranchGroup toptrimE16 = createToptrim(new Vector3f(1f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE16);
+        BranchGroup toptrimE17 = createToptrim(new Vector3f(1.4f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE17);
+        BranchGroup toptrimE18 = createToptrim(new Vector3f(1.8f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE18);
+        BranchGroup toptrimE19 = createToptrim(new Vector3f(2.2f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE19);
+        BranchGroup toptrimE20 = createToptrim(new Vector3f(2.6f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE20);
+        BranchGroup toptrimE21 = createToptrim(new Vector3f(3f, 1.9f, 5.85f), .2f, 0f);
+        walltg.addChild(toptrimE21);
+        
+        
+        BranchGroup toptrimF1 = createToptrim(new Vector3f(-5f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF1);
+        BranchGroup toptrimF2 = createToptrim(new Vector3f(-4.6f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF2);
+        BranchGroup toptrimF3 = createToptrim(new Vector3f(-4.2f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF3);
+        BranchGroup toptrimF4 = createToptrim(new Vector3f(-3.8f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF4);
+        BranchGroup toptrimF5 = createToptrim(new Vector3f(-3.4f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF5);
+        BranchGroup toptrimF6 = createToptrim(new Vector3f(-3f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF6);
+        BranchGroup toptrimF7 = createToptrim(new Vector3f(-2.6f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF7);
+        BranchGroup toptrimF8 = createToptrim(new Vector3f(-2.2f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF8);
+        BranchGroup toptrimF9 = createToptrim(new Vector3f(-1.8f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF9);
+        BranchGroup toptrimF10 = createToptrim(new Vector3f(-1.4f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF10);
+        BranchGroup toptrimF11 = createToptrim(new Vector3f(-1f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF11);
+        BranchGroup toptrimF12 = createToptrim(new Vector3f(-0.6f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF12);
+        BranchGroup toptrimF13 = createToptrim(new Vector3f(-0.2f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF13);
+        BranchGroup toptrimF14 = createToptrim(new Vector3f(0.2f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF14);
+        BranchGroup toptrimF15 = createToptrim(new Vector3f(0.6f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF15);
+        BranchGroup toptrimF16 = createToptrim(new Vector3f(1f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF16);
+        BranchGroup toptrimF17 = createToptrim(new Vector3f(1.4f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF17);
+        BranchGroup toptrimF18 = createToptrim(new Vector3f(1.8f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF18);
+        BranchGroup toptrimF19 = createToptrim(new Vector3f(2.2f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF19);
+        BranchGroup toptrimF20 = createToptrim(new Vector3f(2.6f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF20);
+        BranchGroup toptrimF21 = createToptrim(new Vector3f(3f, 1.9f, -2.15f), .2f, 0f);
+        walltg.addChild(toptrimF21);
         return walltg;
     }
     private static BranchGroup createDoor(Vector3f position, float scale, float rotationAngle) {
