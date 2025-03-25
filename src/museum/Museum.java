@@ -81,6 +81,11 @@ public class Museum extends JPanel {
         sceneBG.addChild(GameObjects.createFloor());
         sceneBG.addChild(GameObjects.createWalls());
         
+        sceneBG.addChild(Window.createWindowElements());
+        
+
+        
+        
         sceneBG.addChild(TicketRoom.createTicketRoom());
 
         // Add lighting to the scene

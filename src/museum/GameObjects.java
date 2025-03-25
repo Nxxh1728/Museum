@@ -84,7 +84,7 @@ public class GameObjects {
 	static Appearance white = set_Appearance(White);
 	
 	// Helper function to create a wall
-    private static TransformGroup createWall(Vector3f position, Vector3f size, Appearance appearance) {
+    public static TransformGroup createWall(Vector3f position, Vector3f size, Appearance appearance) {
         TransformGroup wallGroup = new TransformGroup();
         Transform3D transform = new Transform3D();
         transform.setTranslation(position);
@@ -104,6 +104,8 @@ public class GameObjects {
         floorGroup.addChild(floorBox);
         return floorGroup;
     }
+    
+    
     
     public static TransformGroup createFloor() {
         TransformGroup tg = new TransformGroup();
