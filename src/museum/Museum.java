@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.jogamp.java3d.*;
+import org.jogamp.java3d.utils.image.TextureLoader;
 import org.jogamp.java3d.utils.universe.*;
 import org.jogamp.vecmath.*;
 
@@ -54,9 +55,29 @@ public class Museum extends JPanel {
         
         updateViewer();
     }
+    
+    private static Background create_Background(String textureFile) {
+        String filePath = "images/" + textureFile + ".jpg";
+        TextureLoader loader = new TextureLoader(filePath, null);
+        ImageComponent2D image = loader.getImage();
+
+        if (image == null) {
+            System.out.println("Cannot load background file: " + filePath);
+            return null;
+        }
+
+        Background background = new Background();
+        background.setImage(image);
+        background.setImageScaleMode(Background.SCALE_FIT_MAX);
+        background.setApplicationBounds(new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 100.0));
+
+        return background;
+    }
 
     private BranchGroup createScene() {
         BranchGroup sceneBG = new BranchGroup();
+        sceneBG.addChild(create_Background("bg"));
+        
         sceneBG.addChild(GameObjects.createFloor());
         sceneBG.addChild(GameObjects.createWalls());
         
