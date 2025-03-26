@@ -147,8 +147,6 @@ public class Museum extends JPanel {
     }
 
 
-
-
     public void updateViewer() {
         viewTM.lookAt(camera, centerPoint, upDir);
         viewTM.invert();
