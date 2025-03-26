@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_202"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 8 [1.8.0_421]"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="images"/>
 	<classpathentry kind="src" path="sounds"/>
 	<classpathentry kind="src" path="objects"/>
-	<classpathentry kind="lib" path="C:/jars4java3d/gluegen-rt.jar"/>
-	<classpathentry kind="lib" path="C:/jars4java3d/java3d-core.jar"/>
-	<classpathentry kind="lib" path="C:/jars4java3d/java3d-examples.jar"/>
-	<classpathentry kind="lib" path="C:/jars4java3d/java3d-utils.jar"/>
-	<classpathentry kind="lib" path="C:/jars4java3d/jogamp-fat.jar"/>
-	<classpathentry kind="lib" path="C:/jars4java3d/jogamp-fat-test.jar"/>
-	<classpathentry kind="lib" path="C:/jars4java3d/jogl-demos.jar"/>
-	<classpathentry kind="lib" path="C:/jars4java3d/jogl-fonts-p0.jar"/>
-	<classpathentry kind="lib" path="C:/jars4java3d/vecmath.jar"/>
+	<classpathentry kind="lib" path="/Users/kevinneave/Desktop/School/Comp2800/Codes/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="/Users/kevinneave/Desktop/School/Comp2800/Codes/java3d-core.jar"/>
+	<classpathentry kind="lib" path="/Users/kevinneave/Desktop/School/Comp2800/Codes/java3d-examples.jar"/>
+	<classpathentry kind="lib" path="/Users/kevinneave/Desktop/School/Comp2800/Codes/java3d-utils.jar"/>
+	<classpathentry kind="lib" path="/Users/kevinneave/Desktop/School/Comp2800/Codes/jogamp-fat.jar"/>
+	<classpathentry kind="lib" path="/Users/kevinneave/Desktop/School/Comp2800/Codes/jogamp-fat-test.jar"/>
+	<classpathentry kind="lib" path="/Users/kevinneave/Desktop/School/Comp2800/Codes/jogl-demos.jar"/>
+	<classpathentry kind="lib" path="/Users/kevinneave/Desktop/School/Comp2800/Codes/jogl-fonts-p0.jar"/>
+	<classpathentry kind="lib" path="/Users/kevinneave/Desktop/School/Comp2800/Codes/vecmath.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
