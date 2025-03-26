@@ -1,6 +1,5 @@
 package museum;
 
-
 import java.util.ArrayList;
 
 import org.jogamp.java3d.*;
@@ -14,76 +13,98 @@ import org.jogamp.vecmath.Vector3d;
 import org.jogamp.vecmath.Vector3f;
 
 public class GameObjects {
-	
-	public static Appearance set_Appearance(Color3f color) {
-	    Appearance app = new Appearance();
-	    
-	    // Set polygon attributes to show both sides
-	    PolygonAttributes pa = new PolygonAttributes();
-	    pa.setCullFace(PolygonAttributes.CULL_NONE); // show both sides
-	    app.setPolygonAttributes(pa);
+    
+    public static Appearance set_Appearance(Color3f color) {
+        Appearance app = new Appearance();
+        
+        // Set polygon attributes to show both sides
+        PolygonAttributes pa = new PolygonAttributes();
+        pa.setCullFace(PolygonAttributes.CULL_NONE); // show both sides
+        app.setPolygonAttributes(pa);
 
-	    // Create a Material object with the specified color
-	    Material material = new Material();
-	    material.setDiffuseColor(color);
-	    material.setSpecularColor(new Color3f(0.7f, 0.7f, 0.7f)); // Optional: Set specular color
-	    material.setShininess(64.0f); // Optional: Set shininess
-	    material.setLightingEnable(true); // Ensure lighting is enabled
+        // Create a Material object with the specified color
+        Material material = new Material();
+        material.setDiffuseColor(color);
+        material.setSpecularColor(new Color3f(0.7f, 0.7f, 0.7f)); // Optional: Set specular color
+        material.setShininess(64.0f); // Optional: Set shininess
+        material.setLightingEnable(true); // Ensure lighting is enabled
 
-	    // Enable lighting and set the material
-	    app.setMaterial(material);
+        // Enable lighting and set the material
+        app.setMaterial(material);
 
-	    return app;
-	}
-	
-	public static Appearance set_Appearance(String s) {
-		Appearance app = new Appearance();
-		PolygonAttributes pa = new PolygonAttributes();
-		pa.setCullFace(PolygonAttributes.CULL_NONE);       // show both sides
-		app.setPolygonAttributes(pa);
+        return app;
+    }
+    
+    public static Appearance set_Appearance(String s) {
+        Appearance app = new Appearance();
+        PolygonAttributes pa = new PolygonAttributes();
+        pa.setCullFace(PolygonAttributes.CULL_NONE);       // show both sides
+        app.setPolygonAttributes(pa);
 
-		TexCoordGeneration tcg = new TexCoordGeneration(TexCoordGeneration.OBJECT_LINEAR,
-				TexCoordGeneration.TEXTURE_COORDINATE_2);
-		app.setTexCoordGeneration(tcg);
-		app.setTexture(texture_Appearance(s));
-		
-		TextureAttributes textureAttrib= new TextureAttributes();
-		textureAttrib.setTextureMode(TextureAttributes.REPLACE);
-		app.setTextureAttributes(textureAttrib);
-	
-		float scl = 0.250f;                                  // need to rearrange the four quarters
-		Vector3d scale = new Vector3d(scl, scl, scl);
-		Transform3D transMap = new Transform3D();
-		transMap.setScale(scale);
-		textureAttrib.setTextureTransform(transMap);
-		
-		return app;
-	}
-	
-	private static Texture2D texture_Appearance(String f_name) {
-		String file_name = "images/" + f_name + ".jpg";    // indicate the location of the image
-		TextureLoader loader = new TextureLoader(file_name, null);
-		ImageComponent2D image = loader.getImage();        // get the image
-		if (image == null)
-			System.out.println("Cannot load file: " + file_name);
+        TexCoordGeneration tcg = new TexCoordGeneration(TexCoordGeneration.OBJECT_LINEAR,
+                TexCoordGeneration.TEXTURE_COORDINATE_2);
+        app.setTexCoordGeneration(tcg);
+        app.setTexture(texture_Appearance(s));
+        
+        TextureAttributes textureAttrib= new TextureAttributes();
+        textureAttrib.setTextureMode(TextureAttributes.REPLACE);
+        app.setTextureAttributes(textureAttrib);
+    
+        float scl = 0.250f;                                  // need to rearrange the four quarters
+        Vector3d scale = new Vector3d(scl, scl, scl);
+        Transform3D transMap = new Transform3D();
+        transMap.setScale(scale);
+        textureAttrib.setTextureTransform(transMap);
+        
+        return app;
+    }
+    
+    // Add this new method for white pearl appearance
+    public static Appearance createWhitePearlAppearance() {
+        Appearance app = new Appearance();
+        
+        // Set polygon attributes to show both sides
+        PolygonAttributes pa = new PolygonAttributes();
+        pa.setCullFace(PolygonAttributes.CULL_NONE);
+        app.setPolygonAttributes(pa);
 
-		Texture2D texture = new Texture2D(Texture2D.BASE_LEVEL,
-				Texture2D.RGBA, image.getWidth(), image.getHeight());
-		texture.setImage(0, image);                        // define the texture with the image
+        // Create a pearlescent material
+        Material material = new Material();
+        material.setDiffuseColor(new Color3f(0.95f, 0.95f, 0.95f)); // Very light gray/white
+        material.setSpecularColor(new Color3f(0.8f, 0.8f, 0.8f));   // Bright white specular
+        material.setShininess(128.0f);                              // High shininess for pearl effect
+        material.setLightingEnable(true);
+        
+        app.setMaterial(material);
+        
+        return app;
+    }
+    
+    private static Texture2D texture_Appearance(String f_name) {
+        String file_name = "images/" + f_name + ".jpg";    // indicate the location of the image
+        TextureLoader loader = new TextureLoader(file_name, null);
+        ImageComponent2D image = loader.getImage();        // get the image
+        if (image == null)
+            System.out.println("Cannot load file: " + file_name);
 
-		return texture;
-	}
-	
+        Texture2D texture = new Texture2D(Texture2D.BASE_LEVEL,
+                Texture2D.RGBA, image.getWidth(), image.getHeight());
+        texture.setImage(0, image);                        // define the texture with the image
+
+        return texture;
+    }
+    
     static Color3f palePurple = new Color3f(0.7f, 0.6f, 1.0f);
     static Color3f White = new Color3f(1f, 1f, 1.0f);
 
-    //static Appearance walls = set_Appearance(palePurple);
-	
-	static Appearance walls = set_Appearance("wall3");
-	static Appearance floor = set_Appearance("floor");
-	static Appearance white = set_Appearance(White);
-	
-	// Helper function to create a wall
+    // Create the white pearl appearance as a static field
+    static Appearance whitePearl = createWhitePearlAppearance();
+    
+    static Appearance walls = set_Appearance("wall3");
+    static Appearance floor = set_Appearance("floor");
+    static Appearance white = set_Appearance(White);
+    
+    // Helper function to create a wall
     public static TransformGroup createWall(Vector3f position, Vector3f size, Appearance appearance) {
         TransformGroup wallGroup = new TransformGroup();
         Transform3D transform = new Transform3D();
@@ -212,39 +233,39 @@ public class GameObjects {
         BranchGroup baseboard11 = createBaseboard(new Vector3f(-6.0f, 0.4f, -4.86f), .6f, 90f);
         walltg.addChild(baseboard11);
         
-        BranchGroup baseboardA1 = createBaseboard(new Vector3f(-.6f, 0.4f, 1.86f), .6f, 0f);
+        BranchGroup baseboardA1 = createBaseboard(new Vector3f(-.6f, 0.4f, -1.86f), .6f, 0f);
         walltg.addChild(baseboardA1);
-        BranchGroup baseboardA2 = createBaseboard(new Vector3f(-1.4f, 0.4f, 1.86f), .6f, 0f);
+        BranchGroup baseboardA2 = createBaseboard(new Vector3f(-1.4f, 0.4f, -1.86f), .6f, 0f);
         walltg.addChild(baseboardA2);
-        BranchGroup baseboardA3 = createBaseboard(new Vector3f(-3.6f, 0.4f, 1.86f), .6f, 0f);
+        BranchGroup baseboardA3 = createBaseboard(new Vector3f(-3.6f, 0.4f, -1.86f), .6f, 0f);
         walltg.addChild(baseboardA3);
-        BranchGroup baseboardA4 = createBaseboard(new Vector3f(-4.8f, 0.4f, 1.86f), .6f, 0f);
+        BranchGroup baseboardA4 = createBaseboard(new Vector3f(-4.8f, 0.4f, -1.86f), .6f, 0f);
         walltg.addChild(baseboardA4);
-        BranchGroup baseboardA5 = createBaseboard(new Vector3f(1.6f, 0.4f, 1.86f), .6f, 0f);
+        BranchGroup baseboardA5 = createBaseboard(new Vector3f(1.6f, 0.4f, -1.86f), .6f, 0f);
         walltg.addChild(baseboardA5);
-        BranchGroup baseboardA6 = createBaseboard(new Vector3f(2.8f, 0.4f, 1.86f), .6f, 0f);
+        BranchGroup baseboardA6 = createBaseboard(new Vector3f(2.8f, 0.4f, -1.86f), .6f, 0f);
         walltg.addChild(baseboardA6);
-        BranchGroup baseboardA7 = createBaseboard(new Vector3f(4f, 0.4f, 1.86f), .6f, 0f);
+        BranchGroup baseboardA7 = createBaseboard(new Vector3f(4f, 0.4f, -1.86f), .6f, 0f);
         walltg.addChild(baseboardA7);
-        BranchGroup baseboardA8 = createBaseboard(new Vector3f(5.2f, 0.4f, 1.86f), .6f, 0f);
+        BranchGroup baseboardA8 = createBaseboard(new Vector3f(5.2f, 0.4f, -1.86f), .6f, 0f);
         walltg.addChild(baseboardA8);
         
         
-        BranchGroup baseboardB1 = createBaseboard(new Vector3f(.6f, 0.4f, 1.86f), .6f, 180f);
+        BranchGroup baseboardB1 = createBaseboard(new Vector3f(.6f, 0.4f, -1.86f), .6f, 180f);
         walltg.addChild(baseboardB1);
-        BranchGroup baseboardB2 = createBaseboard(new Vector3f(1.4f, 0.4f, 1.86f), .6f, 180f);
+        BranchGroup baseboardB2 = createBaseboard(new Vector3f(1.4f, 0.4f, -1.86f), .6f, 180f);
         walltg.addChild(baseboardB2);
-        BranchGroup baseboardB3 = createBaseboard(new Vector3f(3.6f, 0.4f, 1.86f), .6f, 180f);
+        BranchGroup baseboardB3 = createBaseboard(new Vector3f(3.6f, 0.4f, -1.86f), .6f, 180f);
         walltg.addChild(baseboardB3);
-        BranchGroup baseboardB4 = createBaseboard(new Vector3f(4.8f, 0.4f, 1.86f), .6f, 180f);
+        BranchGroup baseboardB4 = createBaseboard(new Vector3f(4.8f, 0.4f, -1.86f), .6f, 180f);
         walltg.addChild(baseboardB4);
-        BranchGroup baseboardB5 = createBaseboard(new Vector3f(-1.6f, 0.4f, 1.86f), .6f, 180f);
+        BranchGroup baseboardB5 = createBaseboard(new Vector3f(-1.6f, 0.4f, -1.86f), .6f, 180f);
         walltg.addChild(baseboardB5);
-        BranchGroup baseboardB6 = createBaseboard(new Vector3f(-2.8f, 0.4f, 1.86f), .6f, 180f);
+        BranchGroup baseboardB6 = createBaseboard(new Vector3f(-2.8f, 0.4f, -1.86f), .6f, 180f);
         walltg.addChild(baseboardB6);
-        BranchGroup baseboardB7 = createBaseboard(new Vector3f(-4f, 0.4f, 1.86f), .6f, 180f);
+        BranchGroup baseboardB7 = createBaseboard(new Vector3f(-4f, 0.4f, -1.86f), .6f, 180f);
         walltg.addChild(baseboardB7);
-        BranchGroup baseboardB8 = createBaseboard(new Vector3f(-5.2f, 0.4f, 1.86f), .6f, 180f);
+        BranchGroup baseboardB8 = createBaseboard(new Vector3f(-5.2f, 0.4f, -1.86f), .6f, 180f);
         walltg.addChild(baseboardB8);
         
         
@@ -317,36 +338,36 @@ public class GameObjects {
         walltg.addChild(baseboardE8);
         
         
-        BranchGroup baseboardF1 = createBaseboard(new Vector3f(-2.4f, 0.4f, 5.86f), .6f, 180f);
+        BranchGroup baseboardF1 = createBaseboard(new Vector3f(-2.4f, 0.4f, -5.86f), .6f, 180f);
         walltg.addChild(baseboardF1);
-        BranchGroup baseboardF2 = createBaseboard(new Vector3f(-1.2f, 0.4f, 5.86f), .6f, 180f);
+        BranchGroup baseboardF2 = createBaseboard(new Vector3f(-1.2f, 0.4f, -5.86f), .6f, 180f);
         walltg.addChild(baseboardF2);
-        BranchGroup baseboardF3 = createBaseboard(new Vector3f(0f, 0.4f, 5.86f), .6f, 180f);
+        BranchGroup baseboardF3 = createBaseboard(new Vector3f(0f, 0.4f, -5.86f), .6f, 180f);
         walltg.addChild(baseboardF3);
-        BranchGroup baseboardF4 = createBaseboard(new Vector3f(1.2f, 0.4f, 5.86f), .6f, 180f);
+        BranchGroup baseboardF4 = createBaseboard(new Vector3f(1.2f, 0.4f, -5.86f), .6f, 180f);
         walltg.addChild(baseboardF4);
-        BranchGroup baseboardF5 = createBaseboard(new Vector3f(2.4f, 0.4f, 5.86f), .6f, 180f);
+        BranchGroup baseboardF5 = createBaseboard(new Vector3f(2.4f, 0.4f, -5.86f), .6f, 180f);
         walltg.addChild(baseboardF5);
-        BranchGroup baseboardF6 = createBaseboard(new Vector3f(3.6f, 0.4f, 5.86f), .6f, 180f);
+        BranchGroup baseboardF6 = createBaseboard(new Vector3f(3.6f, 0.4f, -5.86f), .6f, 180f);
         walltg.addChild(baseboardF6);
-        BranchGroup baseboardF7 = createBaseboard(new Vector3f(4.8f, 0.4f, 5.86f), .6f, 180f);
+        BranchGroup baseboardF7 = createBaseboard(new Vector3f(4.8f, 0.4f, -5.86f), .6f, 180f);
         walltg.addChild(baseboardF7);
-        BranchGroup baseboardF8 = createBaseboard(new Vector3f(6.0f, 0.4f, 5.86f), .6f, 180f);
+        BranchGroup baseboardF8 = createBaseboard(new Vector3f(6.0f, 0.4f, -5.86f), .6f, 180f);
         walltg.addChild(baseboardF8);
 
-        BranchGroup baseboardG1 = createBaseboard(new Vector3f(2.4f, 0.4f, 5.86f), .6f, 0f);
+        BranchGroup baseboardG1 = createBaseboard(new Vector3f(2.4f, 0.4f, -5.86f), .6f, 0f);
         walltg.addChild(baseboardG1);
-        BranchGroup baseboardG2 = createBaseboard(new Vector3f(1.2f, 0.4f, 5.86f), .6f, 0);
+        BranchGroup baseboardG2 = createBaseboard(new Vector3f(1.2f, 0.4f, -5.86f), .6f, 0);
         walltg.addChild(baseboardG2);
-        BranchGroup baseboardG3 = createBaseboard(new Vector3f(0f, 0.4f, 5.86f), .6f, 0);
+        BranchGroup baseboardG3 = createBaseboard(new Vector3f(0f, 0.4f, -5.86f), .6f, 0);
         walltg.addChild(baseboardG3);
-        BranchGroup baseboardG4 = createBaseboard(new Vector3f(-1.2f, 0.4f, 5.86f), .6f, 0);
+        BranchGroup baseboardG4 = createBaseboard(new Vector3f(-1.2f, 0.4f, -5.86f), .6f, 0);
         walltg.addChild(baseboardG4);
-        BranchGroup baseboardG5 = createBaseboard(new Vector3f(-2.4f, 0.4f, 5.86f), .6f, 0);
+        BranchGroup baseboardG5 = createBaseboard(new Vector3f(-2.4f, 0.4f, -5.86f), .6f, 0);
         walltg.addChild(baseboardG5);
-        BranchGroup baseboardG6 = createBaseboard(new Vector3f(-3.6f, 0.4f, 5.86f), .6f, 0);
+        BranchGroup baseboardG6 = createBaseboard(new Vector3f(-3.6f, 0.4f, -5.86f), .6f, 0);
         walltg.addChild(baseboardG6);
-        BranchGroup baseboardG7 = createBaseboard(new Vector3f(-4.8f, 0.4f, 5.86f), .6f, 0);
+        BranchGroup baseboardG7 = createBaseboard(new Vector3f(-4.8f, 0.4f, -5.86f), .6f, 0);
         walltg.addChild(baseboardG7);
         BranchGroup baseboardG8 = createBaseboard(new Vector3f(-6.0f, 0.4f, 5.86f), .6f, 0);
         walltg.addChild(baseboardG8);
@@ -969,13 +990,13 @@ public class GameObjects {
     private static BranchGroup createDoor(Vector3f position, float scale, float rotationAngle) {
         BranchGroup doorGroup = new BranchGroup();
 
-        // Load the door object
-        BranchGroup door = ObjectLoader.loadObject("door1.obj", position, scale);
+        // Load the door object with white pearl appearance
+        BranchGroup door = ObjectLoader.loadObject("door1.obj", position, scale, whitePearl);
 
         // Apply rotation if rotationAngle is not zero
         if (rotationAngle != 0) {
             Transform3D rotationTransform = new Transform3D();
-            rotationTransform.setRotation(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(rotationAngle))); // Rotate around Y-axis
+            rotationTransform.setRotation(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(rotationAngle)));
             TransformGroup rotationGroup = new TransformGroup(rotationTransform);
             rotationGroup.addChild(door);
             doorGroup.addChild(rotationGroup);
@@ -989,13 +1010,13 @@ public class GameObjects {
     public static BranchGroup createBaseboard(Vector3f position, float scale, float rotationAngle) {
         BranchGroup baseboardGroup = new BranchGroup();
 
-        // Load the baseboard object
-        BranchGroup baseboard = ObjectLoader.loadObject("WAINSCOT_PANEL_SOLID.obj", position, scale);
+        // Load the baseboard object with white pearl appearance
+        BranchGroup baseboard = ObjectLoader.loadObject("WAINSCOT_PANEL_SOLID.obj", position, scale, whitePearl);
 
         // Apply rotation if rotationAngle is not zero
         if (rotationAngle != 0) {
             Transform3D rotationTransform = new Transform3D();
-            rotationTransform.setRotation(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(rotationAngle))); // Rotate around Y-axis
+            rotationTransform.setRotation(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(rotationAngle)));
             TransformGroup rotationGroup = new TransformGroup(rotationTransform);
             rotationGroup.addChild(baseboard);
             baseboardGroup.addChild(rotationGroup);
@@ -1009,13 +1030,13 @@ public class GameObjects {
     public static BranchGroup createToptrim(Vector3f position, float scale, float rotationAngle) {
         BranchGroup toptrimGroup = new BranchGroup();
 
-        // Load the toptrim object
-        BranchGroup toptrim = ObjectLoader.loadObject("toptrim.obj", position, scale);
+        // Load the toptrim object with white pearl appearance
+        BranchGroup toptrim = ObjectLoader.loadObject("toptrim.obj", position, scale, whitePearl);
 
         // Apply rotation if rotationAngle is not zero
         if (rotationAngle != 0) {
             Transform3D rotationTransform = new Transform3D();
-            rotationTransform.setRotation(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(rotationAngle))); // Rotate around Y-axis
+            rotationTransform.setRotation(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(rotationAngle)));
             TransformGroup rotationGroup = new TransformGroup(rotationTransform);
             rotationGroup.addChild(toptrim);
             toptrimGroup.addChild(rotationGroup);
@@ -1024,6 +1045,7 @@ public class GameObjects {
         }
 
         return toptrimGroup;
+    
     }
     
     

@@ -11,19 +11,22 @@ import java.io.FileNotFoundException;
 
 public class ObjectLoader {
 
-    // Load a 3D object from the "objects" folder in the same package
+    // Original method remains for backward compatibility
     public static BranchGroup loadObject(String fileName, Vector3f position, float scale) {
+        return loadObject(fileName, position, scale, null);
+    }
+
+    // Updated method with Appearance parameter
+    public static BranchGroup loadObject(String fileName, Vector3f position, float scale, Appearance appearance) {
         BranchGroup objectGroup = new BranchGroup();
         objectGroup.setCapability(BranchGroup.ALLOW_CHILDREN_EXTEND);
         objectGroup.setCapability(BranchGroup.ALLOW_CHILDREN_WRITE);
 
-        // Construct the full path to the object file
         String filePath = "objects/" + fileName;
-
-        // Load the object file with materials
         int flags = ObjectFile.RESIZE | ObjectFile.LOAD_ALL | ObjectFile.TRIANGULATE;
         ObjectFile objFile = new ObjectFile(flags);
         Scene scene = null;
+        
         try {
             scene = objFile.load(filePath);
         } catch (FileNotFoundException e) {
@@ -39,13 +42,12 @@ public class ObjectLoader {
 
         if (scene != null) {
             BranchGroup loadedObject = scene.getSceneGroup();
-
-            // Debug: Print out material names
-            if (loadedObject.getUserData() != null) {
-                System.out.println("Loaded object with user data: " + loadedObject.getUserData());
+            
+            // Apply custom appearance if provided
+            if (appearance != null) {
+                setAppearance(loadedObject, appearance);
             }
 
-            // Create a TransformGroup to position and scale the object
             Transform3D transform3D = new Transform3D();
             transform3D.setTranslation(position);
             transform3D.setScale(scale);
@@ -58,5 +60,17 @@ public class ObjectLoader {
         }
 
         return objectGroup;
+    }
+
+    // Helper method to recursively set appearance on all Shape3D nodes
+    private static void setAppearance(Node node, Appearance appearance) {
+        if (node instanceof Shape3D) {
+            ((Shape3D) node).setAppearance(appearance);
+        } else if (node instanceof Group) {
+            Group group = (Group) node;
+            for (int i = 0; i < group.numChildren(); i++) {
+                setAppearance(group.getChild(i), appearance);
+            }
+        }
     }
 }

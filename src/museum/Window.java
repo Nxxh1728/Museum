@@ -6,7 +6,7 @@ import org.jogamp.vecmath.*;
 public class Window {
     // Color constants
     public static final Color3f BLUE = new Color3f(0.2f, 0.5f, 0.8f);
-    public static final Color3f GRAY = new Color3f(0.5f, 0.5f, 0.5f);
+    public static final Color3f GRAY = new Color3f(0.1f, 0.1f, 0.1f);
     
     private final Color3f color;
 

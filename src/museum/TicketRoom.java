@@ -14,7 +14,7 @@ public class TicketRoom {
         ticketRoomGroup.addChild(createPlant(new Vector3f(3.4f, 0.55f, -1.5f)));
         ticketRoomGroup.addChild(createPlant(new Vector3f(4.5f, 0.55f, -1.5f)));
 
-        // Add the doors to the ticket room
+        // Add the doors to the ticket room with white pearl appearance
         ticketRoomGroup.addChild(createDoor(new Vector3f(0.25f, 0.5f, 3f), 90));  // Door 1
         ticketRoomGroup.addChild(createDoor(new Vector3f(0.25f, 0.5f, -3f), 270)); // Door 2
 
@@ -22,14 +22,14 @@ public class TicketRoom {
     }
 
     private static BranchGroup createPlant(Vector3f pos) {
-        
         float plantScale = 0.5f;
         return ObjectLoader.loadObject("indoor plant_02.obj", pos, plantScale);
     }
 
     private static TransformGroup createDoor(Vector3f position, double angleY) {
         float doorScale = 0.55f;
-        BranchGroup door = ObjectLoader.loadObject("DOOR.obj", position, doorScale);
+        // Use the white pearl appearance for doors
+        BranchGroup door = ObjectLoader.loadObject("DOOR.obj", position, doorScale,null);
 
         TransformGroup doorTransformGroup = new TransformGroup();
         Transform3D doorTransform = new Transform3D();

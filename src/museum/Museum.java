@@ -87,45 +87,67 @@ public class Museum extends JPanel {
 
         
         
-        sceneBG.addChild(TicketRoom.createTicketRoom());
+        BranchGroup ticketRoom = TicketRoom.createTicketRoom();
+        sceneBG.addChild(ticketRoom);
 
-        sceneBG.addChild(add_Lights(White, 1));
+        //sceneBG.addChild(add_Lights(White, 2));
         // Add lighting to the scene
         addLighting(sceneBG);
 
         return sceneBG;
     }
-	public static BranchGroup add_Lights(Color3f clr, int p_num) {
-		BranchGroup lightBG = new BranchGroup();
-		Point3f atn = new Point3f(0.5f, 0.0f, 0.0f);
-		PointLight ptLight;
-		float adjt = 1f;
-		for (int i = 0; (i < p_num) && (i < 2); i++) {
-			if (i > 0) 
-				adjt = -1f;                                // use 'adjt' to change light position 
-			ptLight = new PointLight(clr, new Point3f(3.0f * adjt, 1.0f, 3.0f  * adjt), atn);
-			ptLight.setInfluencingBounds(new BoundingSphere(new Point3d(), 20.0));
-			lightBG.addChild(ptLight);                     // attach the point light to 'lightBG'
-		}
-		return lightBG;
-	}
+    
+    
     private void addLighting(BranchGroup sceneBG) {
-        // Create a bounding leaf for the light to affect the entire scene
         BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 100.0);
 
-        // Create an ambient light
-        AmbientLight ambientLight = new AmbientLight(new Color3f(1.0f, 1.0f, 1.0f));
+        // Increase ambient light brightness slightly
+        AmbientLight ambientLight = new AmbientLight(new Color3f(0.9f, 0.9f, 0.9f)); 
         ambientLight.setInfluencingBounds(bounds);
         sceneBG.addChild(ambientLight);
 
-        // Create a directional light
+        // Brighter directional light for overall visibility
         DirectionalLight directionalLight = new DirectionalLight(
-            new Color3f(1.0f, 1.0f, 1.0f), // Color of the light
-            new Vector3f(-1.0f, -1.0f, -1.0f) // Direction of the light
+            new Color3f(0.8f, 0.8f, 0.8f), // Soft but strong light
+            new Vector3f(-.4f, -1.2f, -1.f) // Slightly adjusted angle for depth
         );
         directionalLight.setInfluencingBounds(bounds);
         sceneBG.addChild(directionalLight);
+        
+        DirectionalLight directionalLight2 = new DirectionalLight(
+                new Color3f(.8f, .8f, .8f), // Color of the light
+                new Vector3f(1.1f, .8f, 1.5f) // Direction of the light
+            );
+        directionalLight2.setInfluencingBounds(bounds);
+        sceneBG.addChild(directionalLight2);
+
+        // Stronger warm spotlights to highlight objects
+        addSpotlight(sceneBG, new Point3f(3f, 3f, 3f), new Vector3f(-0.5f, -1.0f, -0.5f), 2f);
+        addSpotlight(sceneBG, new Point3f(-3f, 3f, -3f), new Vector3f(0.5f, -1.0f, 0.5f), 2f);
+        addSpotlight(sceneBG, new Point3f(3f, -3f, 3f), new Vector3f(-0.5f, -1.0f, -0.5f), 2f);
+        addSpotlight(sceneBG, new Point3f(3f, 3f, -3f), new Vector3f(-0.5f, -1.0f, -0.5f), 2f);
+        addSpotlight(sceneBG, new Point3f(-3f, 3f, 3f), new Vector3f(-0.5f, -1.0f, -0.5f), 2f);
+        addSpotlight(sceneBG, new Point3f(-3f, -3f, -3f), new Vector3f(-0.5f, -1.0f, -0.5f), 2f);
     }
+
+    
+    private void addSpotlight(BranchGroup sceneBG, Point3f position, Vector3f direction, float intensity) {
+        BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 50.0);
+
+        SpotLight spotlight = new SpotLight();
+        spotlight.setColor(new Color3f(0.9f * intensity, 0.8f * intensity, 0.7f * intensity)); // Brighter warm tone
+        spotlight.setPosition(position);
+        spotlight.setAttenuation(1.0f, 0.01f, 0.01f); // Softer falloff
+        spotlight.setDirection(direction);
+        spotlight.setSpreadAngle((float) Math.toRadians(50)); // Wider beam
+        spotlight.setConcentration(10.0f); // Softer edges
+        spotlight.setInfluencingBounds(bounds);
+
+        sceneBG.addChild(spotlight);
+    }
+
+
+
 
     public void updateViewer() {
         viewTM.lookAt(camera, centerPoint, upDir);
