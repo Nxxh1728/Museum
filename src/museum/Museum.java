@@ -86,7 +86,6 @@ public class Museum extends JPanel {
         
 
         
-        
         BranchGroup ticketRoom = TicketRoom.createTicketRoom();
         BranchGroup spaceRoom = SpaceRoom.createSpaceRoom();
         sceneBG.addChild(ticketRoom);
