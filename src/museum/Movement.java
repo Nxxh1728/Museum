@@ -21,6 +21,13 @@ public class Movement implements KeyListener, MouseListener, MouseMotionListener
     private final double ROTATION_SPEED = 5.0;
     private ArrayList<BoundingBox> walls;
     
+    
+    private boolean isJumping = false;
+    private double jumpVelocity = 0;
+    private final double GRAVITY = -0.008;
+    private final double JUMP_STRENGTH = 0.10;
+    private double currentHeight = 0;
+    
     // Mouse control variables
     private boolean mouseControlEnabled = true; // Enabled by default
     private int lastMouseX = -1;
@@ -42,6 +49,25 @@ public class Movement implements KeyListener, MouseListener, MouseMotionListener
         this.walls = walls;
     }
 
+    private void updateJump() {
+        if (isJumping) {
+            // Apply gravity
+            jumpVelocity += GRAVITY;
+            currentHeight += jumpVelocity;
+            
+            // Check if landed
+            if (currentHeight <= 0) {
+                currentHeight = 0;
+                jumpVelocity = 0;
+                isJumping = false;
+            }
+            
+            // Update camera height
+            camera.y = 0.25 + currentHeight; // Base height is 0.25
+            updateLookDirection();
+            museum.updateViewer();
+        }
+    }
     @Override
     public void run() {
         while (true) {
@@ -50,11 +76,21 @@ public class Movement implements KeyListener, MouseListener, MouseMotionListener
             if (dx != 0 || dz != 0) {
                 move(dx, dz);
             }
+            updateJump(); // Update jump physics
             try {
                 Thread.sleep(25);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    // Add this new method to initiate a jump:
+    public void jump() {
+        if (!isJumping) {
+            isJumping = true;
+            jumpVelocity = JUMP_STRENGTH;
+            currentHeight = 0;
         }
     }
 
@@ -227,6 +263,9 @@ public class Movement implements KeyListener, MouseListener, MouseMotionListener
                 break;
             case KeyEvent.VK_M: // Toggle mouse control with 'M' key
                 toggleMouseControl();
+                break;
+            case KeyEvent.VK_SPACE: // Jump with space bar
+                jump();
                 break;
         }
     }
