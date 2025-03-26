@@ -63,7 +63,7 @@ public class Movement implements KeyListener, MouseListener, MouseMotionListener
             }
             
             // Update camera height
-            camera.y = 0.25 + currentHeight; // Base height is 0.25
+            camera.y = 0.35 + currentHeight; // Base height is 0.25
             updateLookDirection();
             museum.updateViewer();
         }

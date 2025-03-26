@@ -150,6 +150,34 @@ public class GameObjects {
 
         tg.addChild(createFloorSection(new Vector3f(4f, 1.99999f, 0f), new Vector3f(1f, 0.1f, 2f), white));
         
+        
+        
+        tg.addChild(createcarpet(new Vector3f(2.7f, 0.105f, 0f), 0.4f, 0f));
+        tg.addChild(createcarpet(new Vector3f(2.15f, 0.105f, 0f), 0.4f, 0f));
+        tg.addChild(createcarpet(new Vector3f(1.6f, 0.105f, 0f), 0.4f, 0f));
+        tg.addChild(createcarpet(new Vector3f(1.05f, 0.105f, 0f), 0.4f, 0f));
+        tg.addChild(createcarpet(new Vector3f(0.5f, 0.105f, 0f), 0.4f, 0f));
+        tg.addChild(createcarpet(new Vector3f(-.05f, 0.105f, 0f), 0.4f, 0f));
+        tg.addChild(createcarpet(new Vector3f(-.6f, 0.105f, 0f), 0.4f, 0f));
+        tg.addChild(createcarpet(new Vector3f(-1.15f, 0.105f, 0f), 0.4f, 0f));
+        tg.addChild(createcarpet(new Vector3f(-1.7f, 0.105f, 0f), 0.4f, 0f));
+        tg.addChild(createcarpet(new Vector3f(-2.25f, 0.105f, 0f), 0.4f, 0f));
+        tg.addChild(createcarpet(new Vector3f(-2.8f, 0.105f, 0f), 0.4f, 0f));
+        
+        
+        tg.addChild(createcarpet(new Vector3f(.69f, 0.105f, .5f), 0.4f, 90f));
+        tg.addChild(createcarpet(new Vector3f(1.24f, 0.105f, .5f), 0.4f, 90f));
+        tg.addChild(createcarpet(new Vector3f(1.79f, 0.105f, .5f), 0.4f, 90f));
+        tg.addChild(createcarpet(new Vector3f(-.69f, 0.105f, .5f), 0.4f, 90f));
+        tg.addChild(createcarpet(new Vector3f(-1.24f, 0.105f, .5f), 0.4f, 90f));
+        tg.addChild(createcarpet(new Vector3f(-1.79f, 0.105f, .5f), 0.4f, 90f));
+        
+        tg.addChild(createcarpet(new Vector3f(.69f, 0.105f, -2.5f), 0.4f, 90f));
+        tg.addChild(createcarpet(new Vector3f(1.24f, 0.105f, -2.5f), 0.4f, 90f));
+        tg.addChild(createcarpet(new Vector3f(1.79f, 0.105f, -2.5f), 0.4f, 90f));
+        tg.addChild(createcarpet(new Vector3f(-.69f, 0.105f, -2.5f), 0.4f, 90f));
+        tg.addChild(createcarpet(new Vector3f(-1.24f, 0.105f, -2.5f), 0.4f, 90f));
+        tg.addChild(createcarpet(new Vector3f(-1.79f, 0.105f, -2.5f), 0.4f, 90f));
         return tg;
     }
 
@@ -984,6 +1012,10 @@ public class GameObjects {
         BranchGroup toptrimL31 = createToptrim(new Vector3f(-6.0f, 1.85f, 2.85f), .2f, 90f);
         walltg.addChild(toptrimL31);
   
+        walltg.addChild(TicketRoom.createPlant(new Vector3f(2.4f, 0.55f, 1.6f)));
+        walltg.addChild(TicketRoom.createPlant(new Vector3f(-4.5f, 0.55f, 1.6f)));
+        walltg.addChild(TicketRoom.createPlant(new Vector3f(2.4f, 0.55f, -1.6f)));
+        walltg.addChild(TicketRoom.createPlant(new Vector3f(-4.5f, 0.55f, -1.6f)));
         
         return walltg;
     }
@@ -1005,6 +1037,26 @@ public class GameObjects {
         }
 
         return doorGroup;
+    }
+    
+    private static BranchGroup createcarpet(Vector3f position, float scale, float rotationAngle) {
+        BranchGroup cGroup = new BranchGroup();
+
+        // Load the door object with white pearl appearance
+        BranchGroup carpet = ObjectLoader.loadObject("carpet.obj", position, scale);
+
+        // Apply rotation if rotationAngle is not zero
+        if (rotationAngle != 0) {
+            Transform3D rotationTransform = new Transform3D();
+            rotationTransform.setRotation(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(rotationAngle)));
+            TransformGroup rotationGroup = new TransformGroup(rotationTransform);
+            rotationGroup.addChild(carpet);
+            cGroup.addChild(rotationGroup);
+        } else {
+            cGroup.addChild(carpet);
+        }
+
+        return cGroup;
     }
     
     public static BranchGroup createBaseboard(Vector3f position, float scale, float rotationAngle) {

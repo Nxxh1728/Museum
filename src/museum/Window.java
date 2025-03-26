@@ -374,7 +374,7 @@ public class Window {
         
         // Create small gray ribs
         Vector3f[] smallRibPositions = {
-            new Vector3f(2.5f, 2f, 0f),
+            new Vector3f(2.501f, 2f, 0f),
             new Vector3f(-4.601f, 2f, 0f)
         };
         

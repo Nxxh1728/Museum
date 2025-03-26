@@ -18,12 +18,33 @@ public class TicketRoom {
         ticketRoomGroup.addChild(createDoor(new Vector3f(0.25f, 0.5f, 3f), 90));  // Door 1
         ticketRoomGroup.addChild(createDoor(new Vector3f(0.25f, 0.5f, -3f), 270)); // Door 2
 
+     // Create a TransformGroup for the booth with rotation capability
+        TransformGroup boothTransformGroup = new TransformGroup();
+        boothTransformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+
+        // Set initial transformation
+        Transform3D boothTransform = new Transform3D();
+        Transform3D rotation = new Transform3D();
+        rotation.rotY(Math.PI / 2); // Rotate 45 degrees around Y-axis
+        boothTransformGroup.getTransform(boothTransform);
+        boothTransform.mul(rotation);
+        boothTransformGroup.setTransform(boothTransform); 
+
+        boothTransformGroup.addChild(booth(new Vector3f(-1f, .5f, 4f))); 
+        ticketRoomGroup.addChild(boothTransformGroup);
+        
         return ticketRoomGroup;
+        
+        
     }
 
-    private static BranchGroup createPlant(Vector3f pos) {
+    public static BranchGroup createPlant(Vector3f pos) {
         float plantScale = 0.5f;
         return ObjectLoader.loadObject("indoor plant_02.obj", pos, plantScale);
+    }
+    public static BranchGroup booth(Vector3f pos) {
+        float boothsc = 0.5f;
+        return ObjectLoader.loadObject("ticket_booth.obj", pos, boothsc);
     }
 
     private static TransformGroup createDoor(Vector3f position, double angleY) {
