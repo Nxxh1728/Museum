@@ -1,8 +1,6 @@
 package museum;
 
 import org.jogamp.java3d.*;
-import org.jogamp.java3d.utils.geometry.Box;
-import org.jogamp.java3d.utils.geometry.Primitive;
 import org.jogamp.vecmath.*;
 
 public class Window {
@@ -371,7 +369,7 @@ public class Window {
         };
         
         for (Vector3f pos : ribPositions) {
-            sceneBG.addChild(grayWindow.createWindow(pos, 1.8f, 0.1f));
+            sceneBG.addChild(grayWindow.createWindow(pos, 1.7f, 0.1f));
         }
         
         // Create small gray ribs
@@ -387,8 +385,8 @@ public class Window {
         // Create blue edges
         Window edge = new Window(Window.BLUE);
         Vector3f[] edgePositions = {
-            new Vector3f(2.5f, 2f, 0f),
-            new Vector3f(-4.601f, 2f, 0f)
+            new Vector3f(2.55f, 2f, 0f),
+            new Vector3f(-4.651f, 2f, 0f)
         };
         
         for (Vector3f pos : edgePositions) {
@@ -397,7 +395,7 @@ public class Window {
         
         Appearance gray = GameObjects.set_Appearance(GRAY);
         
-        sceneBG.addChild(GameObjects.createWall(new Vector3f(-1f, 3.72f, 0.0f), new Vector3f(3.5f, 0.1f, .1f), gray));
+        sceneBG.addChild(GameObjects.createWall(new Vector3f(-1f, 3.62f, 0.0f), new Vector3f(3.5f, 0.1f, .1f), gray));
         
         sceneBG.addChild(GameObjects.createWall(new Vector3f(-4.551f, 3.15f, 0.0f), new Vector3f(0.05f, 0.5f, .05f), gray));
         

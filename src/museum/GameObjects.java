@@ -127,6 +127,8 @@ public class GameObjects {
         tg.addChild(createFloorSection(new Vector3f(-1f, 2.1f, -4f), new Vector3f(4f, 0.1f, 2f), white));
         tg.addChild(createFloorSection(new Vector3f(-1f, 2.1f, 4f), new Vector3f(4f, 0.1f, 2f), white));
 
+        tg.addChild(createFloorSection(new Vector3f(4f, 1.99999f, 0f), new Vector3f(1f, 0.1f, 2f), white));
+        
         return tg;
     }
 
@@ -170,10 +172,16 @@ public class GameObjects {
             new Vector3f(-2.5f, 0f, -1.8f), // Position 2
             new Vector3f(2.5f, 0f, -1.8f),  // Position 3
             new Vector3f(-.5f, 0f, -1.8f),  // Position 4
-            new Vector3f(0f, 0f, -2.8f)   // Position 5
+            new Vector3f(0f, 0f, -2.8f),   // Position 5
+            
+            new Vector3f(.5f, 0f, 2.2f),
+            new Vector3f(-2.5f, 0f, 2.2f),
+            new Vector3f(2.5f, 0f, 2.2f),
+            new Vector3f(-.5f, 0f, 2.2f),
+            new Vector3f(0f, 0f, 3.2f),
         };
 
-        float[] doorRotations = { 0, 0, 180, 180, 270}; // Rotation angles for each door (in degrees)
+        float[] doorRotations = { 0, 0, 180, 180, 270, 0, 0, 180, 180, 90}; // Rotation angles for each door (in degrees)
         float doorScale = 1f; // Adjust scale as needed
 
         for (int i = 0; i < doorPositions.length; i++) {
@@ -238,6 +246,154 @@ public class GameObjects {
         walltg.addChild(baseboardB7);
         BranchGroup baseboardB8 = createBaseboard(new Vector3f(-5.2f, 0.4f, 1.86f), .6f, 180f);
         walltg.addChild(baseboardB8);
+        
+        
+        
+        BranchGroup baseboardC1 = createBaseboard(new Vector3f(0f, 0.4f, -4.86f), .6f, 270f);
+        walltg.addChild(baseboardC1);
+        BranchGroup baseboardC2 = createBaseboard(new Vector3f(-1.2f, 0.4f, -4.86f), .6f, 270f);
+        walltg.addChild(baseboardC2);
+        BranchGroup baseboardC3 = createBaseboard(new Vector3f(1.2f, 0.4f, -4.86f), .6f, 270f);
+        walltg.addChild(baseboardC3);
+        BranchGroup baseboardC4 = createBaseboard(new Vector3f(2.4f, 0.4f, -4.86f), .6f, 270f);
+        walltg.addChild(baseboardC4);
+        BranchGroup baseboardC5 = createBaseboard(new Vector3f(-2.4f, 0.4f, -4.86f), .6f, 270f);
+        walltg.addChild(baseboardC5);
+       
+        BranchGroup baseboardC6 = createBaseboard(new Vector3f(1.1f, 0.4f, -2.86f), .6f, 270f);
+        walltg.addChild(baseboardC6);
+        BranchGroup baseboardC7 = createBaseboard(new Vector3f(-1.1f, 0.4f, -2.86f), .6f, 270f);
+        walltg.addChild(baseboardC7);
+        BranchGroup baseboardC8 = createBaseboard(new Vector3f(2.3f, 0.4f, -2.86f), .6f, 270f);
+        walltg.addChild(baseboardC8);
+        BranchGroup baseboardC9 = createBaseboard(new Vector3f(-2.3f, 0.4f, -2.86f), .6f, 270f);
+        walltg.addChild(baseboardC9);
+        BranchGroup baseboardC10 = createBaseboard(new Vector3f(3.5f, 0.4f, -2.86f), .6f, 270f);
+        walltg.addChild(baseboardC10);
+        BranchGroup baseboardC11 = createBaseboard(new Vector3f(-3.5f, 0.4f, -2.86f), .6f, 270f);
+        walltg.addChild(baseboardC11);
+        BranchGroup baseboardC12 = createBaseboard(new Vector3f(4.7f, 0.4f, -2.86f), .6f, 270f);
+        walltg.addChild(baseboardC12);
+        BranchGroup baseboardC13 = createBaseboard(new Vector3f(-4.7f, 0.4f, -2.86f), .6f, 270f);
+        walltg.addChild(baseboardC13);
+        BranchGroup baseboardC14 = createBaseboard(new Vector3f(5.9f, 0.4f, -2.86f), .6f, 270f);
+        walltg.addChild(baseboardC14);
+        BranchGroup baseboardC15 = createBaseboard(new Vector3f(-5.9f, 0.4f, -2.86f), .6f, 270f);
+        walltg.addChild(baseboardC15);
+        
+        BranchGroup baseboardD1 = createBaseboard(new Vector3f(-.6f, 0.4f, 2.14f), .6f, 0f);
+        walltg.addChild(baseboardD1);
+        BranchGroup baseboardD2 = createBaseboard(new Vector3f(-1.4f, 0.4f, 2.14f), .6f, 0f);
+        walltg.addChild(baseboardD2);
+        BranchGroup baseboardD3 = createBaseboard(new Vector3f(-3.6f, 0.4f, 2.14f), .6f, 0f);
+        walltg.addChild(baseboardD3);
+        BranchGroup baseboardD4 = createBaseboard(new Vector3f(-4.8f, 0.4f, 2.14f), .6f, 0f);
+        walltg.addChild(baseboardD4);
+        BranchGroup baseboardD5 = createBaseboard(new Vector3f(1.6f, 0.4f, 2.14f), .6f, 0f);
+        walltg.addChild(baseboardD5);
+        BranchGroup baseboardD6 = createBaseboard(new Vector3f(2.8f, 0.4f, 2.14f), .6f, 0f);
+        walltg.addChild(baseboardD6);
+        BranchGroup baseboardD7 = createBaseboard(new Vector3f(4f, 0.4f, 2.14f), .6f, 0f);
+        walltg.addChild(baseboardD7);
+        BranchGroup baseboardD8 = createBaseboard(new Vector3f(5.2f, 0.4f, 2.14f), .6f, 0f);
+        walltg.addChild(baseboardD8);
+
+
+        BranchGroup baseboardE1 = createBaseboard(new Vector3f(.6f, 0.4f, 2.14f), .6f, 180f);
+        walltg.addChild(baseboardE1);
+        BranchGroup baseboardE2 = createBaseboard(new Vector3f(1.4f, 0.4f, 2.14f), .6f, 180f);
+        walltg.addChild(baseboardE2);
+        BranchGroup baseboardE3 = createBaseboard(new Vector3f(3.6f, 0.4f, 2.14f), .6f, 180f);
+        walltg.addChild(baseboardE3);
+        BranchGroup baseboardE4 = createBaseboard(new Vector3f(4.8f, 0.4f, 2.14f), .6f, 180f);
+        walltg.addChild(baseboardE4);
+        BranchGroup baseboardE5 = createBaseboard(new Vector3f(-1.6f, 0.4f, 2.14f), .6f, 180f);
+        walltg.addChild(baseboardE5);
+        BranchGroup baseboardE6 = createBaseboard(new Vector3f(-2.8f, 0.4f, 2.14f), .6f, 180f);
+        walltg.addChild(baseboardE6);
+        BranchGroup baseboardE7 = createBaseboard(new Vector3f(-4f, 0.4f, 2.14f), .6f, 180f);
+        walltg.addChild(baseboardE7);
+        BranchGroup baseboardE8 = createBaseboard(new Vector3f(-5.2f, 0.4f, 2.14f), .6f, 180f);
+        walltg.addChild(baseboardE8);
+        
+        
+        BranchGroup baseboardF1 = createBaseboard(new Vector3f(-2.4f, 0.4f, 5.86f), .6f, 180f);
+        walltg.addChild(baseboardF1);
+        BranchGroup baseboardF2 = createBaseboard(new Vector3f(-1.2f, 0.4f, 5.86f), .6f, 180f);
+        walltg.addChild(baseboardF2);
+        BranchGroup baseboardF3 = createBaseboard(new Vector3f(0f, 0.4f, 5.86f), .6f, 180f);
+        walltg.addChild(baseboardF3);
+        BranchGroup baseboardF4 = createBaseboard(new Vector3f(1.2f, 0.4f, 5.86f), .6f, 180f);
+        walltg.addChild(baseboardF4);
+        BranchGroup baseboardF5 = createBaseboard(new Vector3f(2.4f, 0.4f, 5.86f), .6f, 180f);
+        walltg.addChild(baseboardF5);
+        BranchGroup baseboardF6 = createBaseboard(new Vector3f(3.6f, 0.4f, 5.86f), .6f, 180f);
+        walltg.addChild(baseboardF6);
+        BranchGroup baseboardF7 = createBaseboard(new Vector3f(4.8f, 0.4f, 5.86f), .6f, 180f);
+        walltg.addChild(baseboardF7);
+        BranchGroup baseboardF8 = createBaseboard(new Vector3f(6.0f, 0.4f, 5.86f), .6f, 180f);
+        walltg.addChild(baseboardF8);
+
+        BranchGroup baseboardG1 = createBaseboard(new Vector3f(2.4f, 0.4f, 5.86f), .6f, 0f);
+        walltg.addChild(baseboardG1);
+        BranchGroup baseboardG2 = createBaseboard(new Vector3f(1.2f, 0.4f, 5.86f), .6f, 0);
+        walltg.addChild(baseboardG2);
+        BranchGroup baseboardG3 = createBaseboard(new Vector3f(0f, 0.4f, 5.86f), .6f, 0);
+        walltg.addChild(baseboardG3);
+        BranchGroup baseboardG4 = createBaseboard(new Vector3f(-1.2f, 0.4f, 5.86f), .6f, 0);
+        walltg.addChild(baseboardG4);
+        BranchGroup baseboardG5 = createBaseboard(new Vector3f(-2.4f, 0.4f, 5.86f), .6f, 0);
+        walltg.addChild(baseboardG5);
+        BranchGroup baseboardG6 = createBaseboard(new Vector3f(-3.6f, 0.4f, 5.86f), .6f, 0);
+        walltg.addChild(baseboardG6);
+        BranchGroup baseboardG7 = createBaseboard(new Vector3f(-4.8f, 0.4f, 5.86f), .6f, 0);
+        walltg.addChild(baseboardG7);
+        BranchGroup baseboardG8 = createBaseboard(new Vector3f(-6.0f, 0.4f, 5.86f), .6f, 0);
+        walltg.addChild(baseboardG8);
+        
+        BranchGroup baseboardH1 = createBaseboard(new Vector3f(1.1f, 0.4f, 3.14f), .6f, 90f);
+        walltg.addChild(baseboardH1);
+        BranchGroup baseboardH2 = createBaseboard(new Vector3f(-1.1f, 0.4f, 3.14f), .6f, 90f);
+        walltg.addChild(baseboardH2);
+        BranchGroup baseboardH3 = createBaseboard(new Vector3f(2.3f, 0.4f, 3.14f), .6f, 90f);
+        walltg.addChild(baseboardH3);
+        BranchGroup baseboardH4 = createBaseboard(new Vector3f(-2.3f, 0.4f, 3.14f), .6f, 90f);
+        walltg.addChild(baseboardH4);
+        
+        BranchGroup baseboardH5 = createBaseboard(new Vector3f(2.6f, 0.4f, -.86f), .6f, 90f);
+        walltg.addChild(baseboardH5);
+        BranchGroup baseboardH6 = createBaseboard(new Vector3f(-2.6f, 0.4f, -.86f), .6f, 90f);
+        walltg.addChild(baseboardH6);
+        BranchGroup baseboardH7 = createBaseboard(new Vector3f(3.8f, 0.4f, -.86f), .6f, 90f);
+        walltg.addChild(baseboardH7);
+        BranchGroup baseboardH8 = createBaseboard(new Vector3f(-3.8f, 0.4f, -.86f), .6f, 90f);
+        walltg.addChild(baseboardH8);
+        BranchGroup baseboardH9 = createBaseboard(new Vector3f(5f, 0.4f, -.86f), .6f, 90f);
+        walltg.addChild(baseboardH9);
+        BranchGroup baseboardH10 = createBaseboard(new Vector3f(-5f, 0.4f, -.86f), .6f, 90f);
+        walltg.addChild(baseboardH10);
+        BranchGroup baseboardH11 = createBaseboard(new Vector3f(6.2f, 0.4f, -.86f), .6f, 90f);
+        walltg.addChild(baseboardH11);
+        BranchGroup baseboardH12 = createBaseboard(new Vector3f(-6.2f, 0.4f, -.86f), .6f, 90f);
+        walltg.addChild(baseboardH12);
+        
+        BranchGroup baseboardI5 = createBaseboard(new Vector3f(2.6f, 0.4f, 1.14f), .6f, 270f);
+        walltg.addChild(baseboardI5);
+        BranchGroup baseboardI6 = createBaseboard(new Vector3f(-2.6f, 0.4f, 1.14f), .6f, 270f);
+        walltg.addChild(baseboardI6);
+        BranchGroup baseboardI7 = createBaseboard(new Vector3f(3.8f, 0.4f, 1.14f), .6f, 270f);
+        walltg.addChild(baseboardI7);
+        BranchGroup baseboardI8 = createBaseboard(new Vector3f(-3.8f, 0.4f, 1.14f), .6f, 270f);
+        walltg.addChild(baseboardI8);
+        BranchGroup baseboardI9 = createBaseboard(new Vector3f(5f, 0.4f, 1.14f), .6f, 270f);
+        walltg.addChild(baseboardI9);
+        BranchGroup baseboardI10 = createBaseboard(new Vector3f(-5f, 0.4f, 1.14f), .6f, 270f);
+        walltg.addChild(baseboardI10);
+        BranchGroup baseboardI11 = createBaseboard(new Vector3f(6.2f, 0.4f, 1.14f), .6f, 270f);
+        walltg.addChild(baseboardI11);
+        BranchGroup baseboardI12 = createBaseboard(new Vector3f(-6.2f, 0.4f, 1.14f), .6f, 270f);
+        walltg.addChild(baseboardI12);
+
         
         
 

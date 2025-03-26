@@ -11,7 +11,8 @@ public class TicketRoom {
         BranchGroup ticketRoomGroup = new BranchGroup();
 
         // Add the plant to the ticket room
-        ticketRoomGroup.addChild(createPlant());
+        ticketRoomGroup.addChild(createPlant(new Vector3f(3.4f, 0.55f, -1.5f)));
+        ticketRoomGroup.addChild(createPlant(new Vector3f(4.5f, 0.55f, -1.5f)));
 
         // Add the doors to the ticket room
         ticketRoomGroup.addChild(createDoor(new Vector3f(0.25f, 0.5f, 3f), 90));  // Door 1
@@ -20,10 +21,10 @@ public class TicketRoom {
         return ticketRoomGroup;
     }
 
-    private static BranchGroup createPlant() {
-        Vector3f plantPosition = new Vector3f(3.3f, 0.4125f, -1.7f);
-        float plantScale = 0.35f;
-        return ObjectLoader.loadObject("Palm_01.obj", plantPosition, plantScale);
+    private static BranchGroup createPlant(Vector3f pos) {
+        
+        float plantScale = 0.5f;
+        return ObjectLoader.loadObject("indoor plant_02.obj", pos, plantScale);
     }
 
     private static TransformGroup createDoor(Vector3f position, double angleY) {

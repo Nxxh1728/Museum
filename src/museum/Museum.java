@@ -23,6 +23,7 @@ public class Museum extends JPanel {
     private Point3d centerPoint = new Point3d(5, .25, -1); // Look forward along the X-axis
     private Vector3d upDir = new Vector3d(0, 1, 0);
     private Movement movement;
+    public final static Color3f White = new Color3f(1.0f, 1.0f, 1.0f);
 
     public Museum() {
         GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
@@ -88,12 +89,26 @@ public class Museum extends JPanel {
         
         sceneBG.addChild(TicketRoom.createTicketRoom());
 
+        sceneBG.addChild(add_Lights(White, 1));
         // Add lighting to the scene
         addLighting(sceneBG);
 
         return sceneBG;
     }
-
+	public static BranchGroup add_Lights(Color3f clr, int p_num) {
+		BranchGroup lightBG = new BranchGroup();
+		Point3f atn = new Point3f(0.5f, 0.0f, 0.0f);
+		PointLight ptLight;
+		float adjt = 1f;
+		for (int i = 0; (i < p_num) && (i < 2); i++) {
+			if (i > 0) 
+				adjt = -1f;                                // use 'adjt' to change light position 
+			ptLight = new PointLight(clr, new Point3f(3.0f * adjt, 1.0f, 3.0f  * adjt), atn);
+			ptLight.setInfluencingBounds(new BoundingSphere(new Point3d(), 20.0));
+			lightBG.addChild(ptLight);                     // attach the point light to 'lightBG'
+		}
+		return lightBG;
+	}
     private void addLighting(BranchGroup sceneBG) {
         // Create a bounding leaf for the light to affect the entire scene
         BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 100.0);
