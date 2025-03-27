@@ -82,6 +82,26 @@ public class GameObjects {
         return app;
     }
     
+    public static Appearance createMaroonRoughAppearance() {
+        Appearance app = new Appearance();
+        
+        // Set polygon attributes to show both sides
+        PolygonAttributes pa = new PolygonAttributes();
+        pa.setCullFace(PolygonAttributes.CULL_NONE);
+        app.setPolygonAttributes(pa);
+
+        // Create a rough material (low shininess)
+        Material material = new Material();
+        material.setDiffuseColor(new Color3f(0.3f, 0.1f, 0.1f));    // Maroon color
+        material.setAmbientColor(new Color3f(0.3f, 0.05f, 0.05f));  // Darker maroon for ambient
+        material.setSpecularColor(new Color3f(0.3f, 0.1f, 0.1f));   // Dark red specular
+        material.setShininess(5.0f);                               // Low shininess for rough look
+        material.setLightingEnable(true);
+        
+        app.setMaterial(material);
+        
+        return app;
+    }
     private static Texture2D texture_Appearance(String f_name) {
         String file_name = "images/" + f_name + ".jpg";    // indicate the location of the image
         TextureLoader loader = new TextureLoader(file_name, null);
@@ -101,6 +121,8 @@ public class GameObjects {
 
     // Create the white pearl appearance as a static field
     static Appearance whitePearl = createWhitePearlAppearance();
+    static Appearance maroonRough = createMaroonRoughAppearance();
+
     
     static Appearance walls = set_Appearance("wall3");
     static Appearance floor = set_Appearance("floor2");
@@ -1014,10 +1036,10 @@ public class GameObjects {
         BranchGroup toptrimL31 = createToptrim(new Vector3f(-6.0f, 1.85f, 2.85f), .2f, 90f);
         walltg.addChild(toptrimL31);
   
-        walltg.addChild(TicketRoom.createPlant(new Vector3f(2.4f, 0.55f, 1.6f)));
-        walltg.addChild(TicketRoom.createPlant(new Vector3f(-4.5f, 0.55f, 1.6f)));
-        walltg.addChild(TicketRoom.createPlant(new Vector3f(2.4f, 0.55f, -1.6f)));
-        walltg.addChild(TicketRoom.createPlant(new Vector3f(-4.5f, 0.55f, -1.6f)));
+        walltg.addChild(TicketRoom.createPlant(new Vector3f(2.6f, 0.425f, 1.6f)));
+        walltg.addChild(TicketRoom.createPlant(new Vector3f(-4.6f, 0.425f, 1.6f)));
+        walltg.addChild(TicketRoom.createPlant(new Vector3f(2.6f, 0.425f, -1.6f)));
+        walltg.addChild(TicketRoom.createPlant(new Vector3f(-4.6f, 0.425f, -1.6f)));
         
         return walltg;
     }
@@ -1045,7 +1067,7 @@ public class GameObjects {
         BranchGroup cGroup = new BranchGroup();
 
         // Load the door object with white pearl appearance
-        BranchGroup carpet = ObjectLoader.loadObject("carpet.obj", position, scale);
+        BranchGroup carpet = ObjectLoader.loadObject("carpet.obj", position, scale, maroonRough);
 
         // Apply rotation if rotationAngle is not zero
         if (rotationAngle != 0) {
@@ -1132,6 +1154,8 @@ public class GameObjects {
 	    if (!TicketRoom.hasTicket) {
 	        walls.add(ticketWall);
 	    }
+	    
+	    walls.add(new BoundingBox(4.0, 1, .7));
 
 	    return walls;
 	}
