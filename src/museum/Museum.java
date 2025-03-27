@@ -12,6 +12,10 @@ import org.jogamp.java3d.utils.universe.*;
 import org.jogamp.vecmath.*;
 
 public class Museum extends JPanel {
+	
+	private static Museum instance;
+    private Movement movement;
+
     private static final long serialVersionUID = 1L;
     private static JFrame frame;
     private BranchGroup sceneBG;
@@ -22,10 +26,12 @@ public class Museum extends JPanel {
     private Point3d camera = new Point3d(3.75, .35, -1); 
     private Point3d centerPoint = new Point3d(5, .35, -1); 
     private Vector3d upDir = new Vector3d(0, 1, 0);
-    private Movement movement;
+   
     public final static Color3f White = new Color3f(1.0f, 1.0f, 1.0f);
 
     public Museum() {
+    	instance = this;
+    	
         GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
         canvas = new Canvas3D(config);
         su = new SimpleUniverse(canvas);
@@ -56,7 +62,13 @@ public class Museum extends JPanel {
         
         updateViewer();
     }
-    
+    public static Museum getInstance() {
+        return instance;
+    }
+    public void updateWalls() {
+        ArrayList<BoundingBox> updatedWalls = GameObjects.getWallBoundingBoxes();
+        movement.setWalls(updatedWalls);
+    }
     private static Background create_Background(String textureFile) {
         String filePath = "images/" + textureFile + ".jpg";
         TextureLoader loader = new TextureLoader(filePath, null);
@@ -86,7 +98,7 @@ public class Museum extends JPanel {
         
 
         
-        BranchGroup ticketRoom = TicketRoom.createTicketRoom();
+        BranchGroup ticketRoom = TicketRoom.createTicketRoom(canvas);
         BranchGroup spaceRoom = SpaceRoom.createSpaceRoom();
         sceneBG.addChild(ticketRoom);
         sceneBG.addChild(spaceRoom);

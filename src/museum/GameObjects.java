@@ -14,6 +14,8 @@ import org.jogamp.vecmath.Vector3f;
 
 public class GameObjects {
     
+	public static BoundingBox ticketWall = new BoundingBox(TicketRoom.barrier, 0.1, 0.0, 2.0);
+	
     public static Appearance set_Appearance(Color3f color) {
         Appearance app = new Appearance();
         
@@ -1126,6 +1128,10 @@ public class GameObjects {
 	    //dividing walls
 	    walls.add(new BoundingBox(-1.0, 0.1, 4.0, 2.0));
 	    walls.add(new BoundingBox(-1.0, 0.1, -4.0, 2.0));
+	    
+	    if (!TicketRoom.hasTicket) {
+	        walls.add(ticketWall);
+	    }
 
 	    return walls;
 	}

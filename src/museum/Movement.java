@@ -20,6 +20,11 @@ public class Movement implements KeyListener, MouseListener, MouseMotionListener
     private final double MOVE_SPEED = 0.05;
     private final double ROTATION_SPEED = 5.0;
     private ArrayList<BoundingBox> walls;
+
+
+    public void setWalls(ArrayList<BoundingBox> walls) {
+        this.walls = walls;
+    }
     
     
     private boolean isJumping = false;
