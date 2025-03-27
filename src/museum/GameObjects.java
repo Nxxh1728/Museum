@@ -103,7 +103,7 @@ public class GameObjects {
     static Appearance whitePearl = createWhitePearlAppearance();
     
     static Appearance walls = set_Appearance("wall3");
-    static Appearance floor = set_Appearance("floor");
+    static Appearance floor = set_Appearance("floor2");
     static Appearance white = set_Appearance(White);
     
     // Helper function to create a wall

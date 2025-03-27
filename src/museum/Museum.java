@@ -103,7 +103,7 @@ public class Museum extends JPanel {
         sceneBG.addChild(ticketRoom);
         sceneBG.addChild(spaceRoom);
 
-        //sceneBG.addChild(add_Lights(White, 2));
+        
         // Add lighting to the scene
         addLighting(sceneBG);
 

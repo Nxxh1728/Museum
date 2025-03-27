@@ -10,9 +10,6 @@ import org.jogamp.java3d.utils.picking.PickResult;
 import org.jogamp.java3d.utils.picking.PickTool;
 import org.jogamp.java3d.utils.geometry.Box;
 import org.jogamp.vecmath.*;
-import org.jogamp.java3d.Font3D;
-import org.jogamp.java3d.FontExtrusion;
-import org.jogamp.java3d.Text3D;
 
 public class TicketRoom {
     
@@ -32,8 +29,8 @@ public class TicketRoom {
         ticketRoomGroup.addChild(createPlant(new Vector3f(4.5f, 0.55f, -1.5f)));
 
         // Create the doors
-        TransformGroup door1TG = createDoor(new Vector3f(0.25f, 0.5f, 3f), 90);
-        TransformGroup door2TG = createDoor(new Vector3f(0.25f, 0.5f, -3f), 270);
+        TransformGroup door1TG = createDoor(new Vector3f(-0.2f, 0.5f, 3f), 90);
+        TransformGroup door2TG = createDoor(new Vector3f(-0.2f, 0.5f, -3f), 270);
         
         ticketRoomGroup.addChild(door1TG);
         ticketRoomGroup.addChild(door2TG);
@@ -69,6 +66,8 @@ public class TicketRoom {
         textTransformGroup.addChild(createText("Tickets", new Vector3f(-4f, .7f, -0.6f), 0.1f, new Color3f(1f, .9f, 0f)));
         ticketRoomGroup.addChild(textTransformGroup);
         
+        ticketRoomGroup.addChild(host(new Vector3f(0f, 0.55f, -0f)));
+        
         return ticketRoomGroup;
     }
 
@@ -77,14 +76,68 @@ public class TicketRoom {
         return ObjectLoader.loadObject("indoor plant_02.obj", pos, plantScale);
     }
 
+    static Appearance booth = boothAppearance();
+
     public static BranchGroup booth(Vector3f pos) {
         float boothsc = 0.5f;
-        return ObjectLoader.loadObject("ticket_booth.obj", pos, boothsc);
+
+        return ObjectLoader.loadObject("ticket_booth2.obj", pos, boothsc, booth);
     }
+    public static Appearance boothAppearance() {
+        Appearance app = new Appearance();
+        
+        // Set polygon attributes to show both sides
+        PolygonAttributes pa = new PolygonAttributes();
+        pa.setCullFace(PolygonAttributes.CULL_NONE);
+        app.setPolygonAttributes(pa);
+
+        // Create a pearlescent material
+        Material material = new Material();
+        material.setDiffuseColor(new Color3f(0.55f, 0.27f, 0.07f)); // Brown color
+        material.setSpecularColor(new Color3f(0.1f, 0.1f, 0.1f));
+        material.setShininess(10.0f);                              // High shininess for pearl effect
+        material.setLightingEnable(true);
+        
+        app.setMaterial(material);
+        TextureAttributes texAttr = new TextureAttributes();
+        texAttr.setTextureMode(TextureAttributes.MODULATE);
+        app.setTextureAttributes(texAttr);
+        
+        return app;
+    }
+    
+    public static Appearance doorAppearance() {
+        Appearance app = new Appearance();
+        
+        // Set polygon attributes to show both sides
+        PolygonAttributes pa = new PolygonAttributes();
+        pa.setCullFace(PolygonAttributes.CULL_NONE);
+        app.setPolygonAttributes(pa);
+
+        // Create a pearlescent material
+        Material material = new Material();
+        material.setDiffuseColor(new Color3f(0.22f, 0.11f, 0.03f)); // Brown color
+        material.setSpecularColor(new Color3f(0.1f, 0.1f, 0.1f));
+        material.setShininess(25.0f);                              // High shininess for pearl effect
+        material.setLightingEnable(true);
+        
+        app.setMaterial(material);
+        TextureAttributes texAttr = new TextureAttributes();
+        texAttr.setTextureMode(TextureAttributes.MODULATE);
+        app.setTextureAttributes(texAttr);
+        
+        return app;
+    }
+    
+    public static BranchGroup host(Vector3f pos) {
+        float scale = 0.5f;
+        return ObjectLoader.loadObject("Jake.obj", pos, scale);
+    }
+    static Appearance door1 = doorAppearance();
 
     private static TransformGroup createDoor(Vector3f position, double angleY) {
         float doorScale = 0.55f;
-        BranchGroup door = ObjectLoader.loadObject("DOOR.obj", position, doorScale, null);
+        BranchGroup door = ObjectLoader.loadObject("door 1.obj", position, doorScale, door1);
 
         TransformGroup doorTransformGroup = new TransformGroup();
         doorTransformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
@@ -144,7 +197,6 @@ public class TicketRoom {
                             hasTicket = true;
                             System.out.println("Ticket obtained!");
                             barrier = 10f;
-                            
                             
                             Museum.getInstance().updateWalls();
                         }
