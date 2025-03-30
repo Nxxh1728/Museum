@@ -44,11 +44,27 @@ public class TicketRoom {
         return appearance;
     }
     
+    private static SoundPlayer soundPlayer;
+    private static final String LOBBY_SOUND = "lobby";
+    
     public static BranchGroup createTicketRoom(Canvas3D canvas) {
-        TicketRoom.canvas = canvas;
+        // Initialize sound player if not already done
+        if (soundPlayer == null) {
+            soundPlayer = SoundPlayer.getInstance();
+            soundPlayer.loadSound(LOBBY_SOUND, "sounds/lobby.wav");
+        }      
+    	
+    	
+    	TicketRoom.canvas = canvas;
         BranchGroup ticketRoomGroup = new BranchGroup();
         ticketRoomGroup.setCapability(BranchGroup.ALLOW_PICKABLE_READ);
         ticketRoomGroup.setCapability(BranchGroup.ALLOW_PICKABLE_WRITE);
+        
+        
+        
+        
+        soundPlayer.playSound(LOBBY_SOUND, true);
+        soundPlayer.setSoundVolume(LOBBY_SOUND, 0.3f);
 
         // Add the plant to the ticket room
         ticketRoomGroup.addChild(createPlant(new Vector3f(3.4f, 0.425f, -1.5f)));
