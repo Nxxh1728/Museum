@@ -12,6 +12,7 @@ import org.jogamp.java3d.ImageComponent2D;
 import org.jogamp.java3d.LineStripArray;
 import org.jogamp.java3d.Material;
 import org.jogamp.java3d.Morph;
+import org.jogamp.java3d.PointLight;
 import org.jogamp.java3d.PolygonAttributes;
 import org.jogamp.java3d.QuadArray;
 import org.jogamp.java3d.RotationInterpolator;
@@ -62,6 +63,16 @@ public class SpaceRoom {
 		TransformGroup sunTG = new TransformGroup(sunTr);
 		sunTG.addChild(sunMorph);
 		solarSystemTG.addChild(sunTG);
+		
+		//Create sunlight
+		PointLight sunLight = new PointLight(
+				new Color3f(0.3f, 0.15f, 0.0f),  
+			    new Point3f(0.0f, 0.5f, 0.0f),  
+			    new Point3f(1.0f, 0.0f, 0.0f)   
+		);
+		sunLight.setInfluencingBounds(new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 100.0));
+		sunTG.addChild(sunLight);
+		
 		
 		//Create TG for Mercury's orbit
 		TransformGroup mercuryOrbitTG = new TransformGroup();
@@ -353,6 +364,12 @@ public class SpaceRoom {
 	public static Appearance createSunApp() {
 		Appearance app = createApp("sun");
 		PolygonAttributes pa = new PolygonAttributes();
+		Material sunMat = new Material();
+		sunMat.setDiffuseColor(new Color3f(0.8f, 0.4f, 0.0f)); 
+		sunMat.setEmissiveColor(new Color3f(0.05f, 0.03f, 0.0f)); 
+		sunMat.setAmbientColor(new Color3f(0.2f, 0.1f, 0.0f));
+		sunMat.setShininess(64.0f);
+		app.setMaterial(sunMat);
 		pa.setPolygonMode(PolygonAttributes.POLYGON_FILL);
 		pa.setCullFace(PolygonAttributes.CULL_NONE);
 		app.setPolygonAttributes(pa);
