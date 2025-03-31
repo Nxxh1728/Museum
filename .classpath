@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java [1.8.202.08]"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/Users/iliarakhoutine/Downloads/jogamp-fat/jogamp-fat.jar"/>
+	<classpathentry kind="lib" path="/Users/iliarakhoutine/Downloads/jogamp-java3d-1.7.1-final/java3d-core.jar"/>
+	<classpathentry kind="lib" path="/Users/iliarakhoutine/Downloads/jogamp-java3d-1.7.1-final/java3d-examples.jar"/>
+	<classpathentry kind="lib" path="/Users/iliarakhoutine/Downloads/jogamp-java3d-1.7.1-final/java3d-utils.jar"/>
+	<classpathentry kind="lib" path="/Users/iliarakhoutine/Downloads/jogamp-java3d-1.7.1-final/vecmath.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
