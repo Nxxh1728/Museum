@@ -13,12 +13,14 @@ public class MedievalRoom {
     private static Appearance dragonAppearance;
     private static Appearance roomFloorAppearance;
     private static Appearance roomWallAppearance;
+    private static Appearance fireAppearance;
     
     private static SharedGroup dragonModel;
     private static SharedGroup torchModel;
     private static SharedGroup fireplaceModel;
     private static SharedGroup knightModel;
     private static SharedGroup chestModel;
+    private static SharedGroup fireModel;
     
     public static BranchGroup createMedievalRoom() {
         initializeAppearances();
@@ -28,22 +30,27 @@ public class MedievalRoom {
         medievalRoomGroup.addChild(createRoomStructure());
         medievalRoomGroup.addChild(createDragon());
         
-        // Torches marking wall positions
-        medievalRoomGroup.addChild(createTorch(new Vector3f(-1.25f, 1.0f, 4.0f), 0.3f));
-        medievalRoomGroup.addChild(createRotatedTorch(new Vector3f(-4.75f, 1.0f, 4.0f), 0.3f));
-        medievalRoomGroup.addChild(createRotatedTorchNeg90(new Vector3f(-3.0f, 1.0f, 5.75f), 0.3f));
+        Vector3f torchPos1 = new Vector3f(-1.25f, 1.0f, 4.0f);
+        Vector3f torchPos2 = new Vector3f(-4.75f, 1.0f, 4.0f);
+        Vector3f torchPos3 = new Vector3f(-3.0f, 1.0f, 5.75f);
+        medievalRoomGroup.addChild(createTorch(torchPos1, 0.3f));
+        medievalRoomGroup.addChild(createRotatedTorch(torchPos2, 0.3f));
+        medievalRoomGroup.addChild(createRotatedTorchNeg90(torchPos3, 0.3f));
+        medievalRoomGroup.addChild(createFire(torchPos1, 0.2f, 0.0f));
+        medievalRoomGroup.addChild(createFire(torchPos2, 0.2f, (float)Math.PI));
+        medievalRoomGroup.addChild(createFire(torchPos3, 0.2f, (float)(-Math.PI / 2)));
         
         medievalRoomGroup.addChild(createFireplace());
+        medievalRoomGroup.addChild(createFire(new Vector3f(-3.0f, 0.6f, 4.58f), 0.3f, 0.0f));
         medievalRoomGroup.addChild(createKnight());
         medievalRoomGroup.addChild(createChest());
-        medievalRoomGroup.addChild(createLightingGroup());
+        //medievalRoomGroup.addChild(createLightingGroup());
         
         medievalRoomGroup.compile();
         return medievalRoomGroup;
     }
     
     private static void initializeAppearances() {
-        // Wood appearance for wooden objects
         woodAppearance = new Appearance();
         Material woodMaterial = new Material();
         woodMaterial.setDiffuseColor(new Color3f(0.4f, 0.2f, 0.1f));
@@ -54,7 +61,6 @@ public class MedievalRoom {
         polyAttrib.setCullFace(PolygonAttributes.CULL_BACK);
         woodAppearance.setPolygonAttributes(polyAttrib);
         
-        // Metal appearance for knight
         metalAppearance = new Appearance();
         Material metalMaterial = new Material();
         metalMaterial.setDiffuseColor(new Color3f(0.8f, 0.8f, 0.8f));
@@ -65,7 +71,6 @@ public class MedievalRoom {
         polyAttribMetal.setCullFace(PolygonAttributes.CULL_BACK);
         metalAppearance.setPolygonAttributes(polyAttribMetal);
         
-        // Dragon appearance
         dragonAppearance = new Appearance();
         Material dragonMaterial = new Material();
         dragonMaterial.setDiffuseColor(new Color3f(0.2f, 0.3f, 0.1f));
@@ -76,7 +81,6 @@ public class MedievalRoom {
         dragonPolyAttrib.setCullFace(PolygonAttributes.CULL_BACK);
         dragonAppearance.setPolygonAttributes(dragonPolyAttrib);
         
-        // Floor appearance with wood texture
         roomFloorAppearance = new Appearance();
         TextureLoader woodLoader = new TextureLoader("images/wood_floor.jpg", null);
         ImageComponent2D woodImage = woodLoader.getImage();
@@ -94,7 +98,6 @@ public class MedievalRoom {
         floorPolyAttrib.setCullFace(PolygonAttributes.CULL_BACK);
         roomFloorAppearance.setPolygonAttributes(floorPolyAttrib);
         
-        // Wall appearance with stone texture
         roomWallAppearance = new Appearance();
         TextureLoader stoneLoader = new TextureLoader("images/stone_texture.jpg", null);
         ImageComponent2D stoneImage = stoneLoader.getImage();
@@ -111,6 +114,16 @@ public class MedievalRoom {
         PolygonAttributes wallPolyAttrib = new PolygonAttributes();
         wallPolyAttrib.setCullFace(PolygonAttributes.CULL_BACK);
         roomWallAppearance.setPolygonAttributes(wallPolyAttrib);
+        
+        fireAppearance = new Appearance();
+        Material fireMaterial = new Material();
+        fireMaterial.setDiffuseColor(new Color3f(1.0f, 0.5f, 0.0f));
+        fireMaterial.setSpecularColor(new Color3f(1.0f, 0.7f, 0.2f));
+        fireMaterial.setShininess(50.0f);
+        fireAppearance.setMaterial(fireMaterial);
+        PolygonAttributes firePolyAttrib = new PolygonAttributes();
+        firePolyAttrib.setCullFace(PolygonAttributes.CULL_BACK);
+        fireAppearance.setPolygonAttributes(firePolyAttrib);
     }
     
     private static void cacheModels() {
@@ -119,6 +132,7 @@ public class MedievalRoom {
         fireplaceModel = loadModel("fireplace.obj", woodAppearance);
         knightModel = loadModel("knight.obj", metalAppearance);
         chestModel = loadModel("chest.obj", woodAppearance);
+        fireModel = loadModel("fire.obj", fireAppearance);
     }
     
     private static SharedGroup loadModel(String filename, Appearance appearance) {
@@ -131,15 +145,13 @@ public class MedievalRoom {
     private static BranchGroup createRoomStructure() {
         BranchGroup roomGroup = new BranchGroup();
         
-        // Room dimensions
         float xMin = -5.0f, xMax = -1.0f;
         float zMin = 2.75f, zMax = 6.0f;
         float wallHeight = 2.5f;
         float floorY = 0.0f;
-        float wallThickness = 0.15f; // Thin wall thickness
-        float wallOffset = 0.01f; // Small offset to bring walls forward
+        float wallThickness = 0.15f;
+        float wallOffset = 0.01f;
 
-        // Floor
         QuadArray floorQuad = new QuadArray(4, GeometryArray.COORDINATES | GeometryArray.NORMALS | GeometryArray.TEXTURE_COORDINATE_2);
         Point3f[] floorCoords = {
             new Point3f(xMin, floorY, zMin),
@@ -150,17 +162,14 @@ public class MedievalRoom {
         floorQuad.setCoordinates(0, floorCoords);
         roomGroup.addChild(new Shape3D(floorQuad, roomFloorAppearance));
 
-        // Left Wall - moved slightly to the right (positive X)
         createTexturedWall(roomGroup,
             new Vector3f(xMin + wallOffset, wallHeight/2, (zMin+zMax)/2),
             new Vector3f(wallThickness, wallHeight/2, (zMax-zMin)/2));
 
-        // Right Wall - moved slightly to the left (negative X)
         createTexturedWall(roomGroup,
-            new Vector3f(xMax - 6* wallOffset, wallHeight/2, (zMin+zMax)/2),
+            new Vector3f(xMax - 6*wallOffset, wallHeight/2, (zMin+zMax)/2),
             new Vector3f(wallThickness, wallHeight/2, (zMax-zMin)/2));
 
-        // Back Wall - moved slightly forward (negative Z)
         createTexturedWall(roomGroup,
             new Vector3f((xMin+xMax)/2, wallHeight/2, zMax - wallOffset),
             new Vector3f((xMax-xMin)/2, wallHeight/2, wallThickness));
@@ -171,19 +180,14 @@ public class MedievalRoom {
     private static void createTexturedWall(BranchGroup parent, Vector3f center, Vector3f dimensions) {
         TransformGroup wallTG = new TransformGroup();
         Transform3D transform = new Transform3D();
-        
-        // Position the wall slightly in front of the original wall
         Vector3f adjustedPosition = new Vector3f(center.x, dimensions.y, center.z);
         transform.setTranslation(adjustedPosition);
         wallTG.setTransform(transform);
-        
-        // Create the textured wall
         Box wall = new Box(
             dimensions.x, dimensions.y, dimensions.z,
             Primitive.GENERATE_NORMALS | Primitive.GENERATE_TEXTURE_COORDS,
             roomWallAppearance
         );
-        
         wallTG.addChild(wall);
         parent.addChild(wallTG);
     }
@@ -287,21 +291,42 @@ public class MedievalRoom {
         return fireplaceGroup;
     }
     
+    private static BranchGroup createFire(Vector3f position, float scale, float rotationY) {
+        Transform3D transform = new Transform3D();
+        transform.setScale(scale);
+        Vector3f adjustedPos;
+        if (position.y == 1.0f) { // Torch fire
+            float yOffset = 0.5f; // Move up more
+            float xAdjust = (position.x == -1.25f) ? -0.2f : (position.x == -4.75f) ? 0.2f : 0.0f; // Towards room center
+            float zAdjust = (position.z == 5.75f) ? -0.2f : 0.05f; // Towards room center
+            adjustedPos = new Vector3f(position.x + xAdjust, position.y + yOffset, position.z + zAdjust);
+        } else { // Fireplace fire
+            adjustedPos = new Vector3f(position.x, position.y, position.z); // No offset, keep as is
+        }
+        transform.setTranslation(adjustedPos);
+        if (rotationY != 0.0f) {
+            Transform3D rotation = new Transform3D();
+            rotation.rotY(rotationY);
+            transform.mul(rotation);
+        }
+        TransformGroup fireTG = new TransformGroup(transform);
+        fireTG.addChild(new Link(fireModel));
+        BranchGroup fireGroup = new BranchGroup();
+        fireGroup.addChild(fireTG);
+        return fireGroup;
+    }
+    
     private static BranchGroup createKnight() {
         Vector3f position = new Vector3f(-3.75f, 0.60f, 4.0f);
         float scale = 0.5f;
-        
         Transform3D transform = new Transform3D();
         transform.setScale(scale);
         transform.setTranslation(position);
-        
         Transform3D rotation = new Transform3D();
         rotation.rotY(Math.PI);
         transform.mul(rotation);
-        
         TransformGroup knightTG = new TransformGroup(transform);
         knightTG.addChild(new Link(knightModel));
-        
         BranchGroup knightGroup = new BranchGroup();
         knightGroup.addChild(knightTG);
         return knightGroup;

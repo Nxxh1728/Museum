@@ -82,6 +82,26 @@ public class GameObjects {
         return app;
     }
     
+    public static Appearance createBoneAppearance() {
+        Appearance app = new Appearance();
+        
+        // Set polygon attributes to show both sides
+        PolygonAttributes pa = new PolygonAttributes();
+        pa.setCullFace(PolygonAttributes.CULL_NONE);
+        app.setPolygonAttributes(pa);
+
+        // Create a pearlescent material
+        Material material = new Material();
+        material.setDiffuseColor(new Color3f(0.75f, 0.69f, 0.58f)); 
+        material.setSpecularColor(new Color3f(0.4f, 0.4f, 0.4f));   // Bright white specular
+        material.setShininess(5.0f);                              // High shininess for pearl effect
+        material.setLightingEnable(true);
+        
+        app.setMaterial(material);
+        
+        return app;
+    }
+    
     public static Appearance createMaroonRoughAppearance() {
         Appearance app = new Appearance();
         
@@ -96,6 +116,27 @@ public class GameObjects {
         material.setAmbientColor(new Color3f(0.3f, 0.05f, 0.05f));  // Darker maroon for ambient
         material.setSpecularColor(new Color3f(0.3f, 0.1f, 0.1f));   // Dark red specular
         material.setShininess(5.0f);                               // Low shininess for rough look
+        material.setLightingEnable(true);
+        
+        app.setMaterial(material);
+        
+        return app;
+    }
+    
+    public static Appearance createStoneGreyAppearance() {
+        Appearance app = new Appearance();
+        
+        // Set polygon attributes to show both sides
+        PolygonAttributes pa = new PolygonAttributes();
+        pa.setCullFace(PolygonAttributes.CULL_NONE);
+        app.setPolygonAttributes(pa);
+
+        // Create a rough material (low shininess)
+        Material material = new Material();
+        material.setDiffuseColor(new Color3f(0.4f, 0.4f, 0.4f));  
+        material.setAmbientColor(new Color3f(0.1f, 0.1f, 0.1f)); 
+        material.setSpecularColor(new Color3f(0.1f, 0.1f, 0.1f));  
+        material.setShininess(5.0f);                               
         material.setLightingEnable(true);
         
         app.setMaterial(material);
@@ -122,6 +163,8 @@ public class GameObjects {
     // Create the white pearl appearance as a static field
     static Appearance whitePearl = createWhitePearlAppearance();
     static Appearance maroonRough = createMaroonRoughAppearance();
+    static Appearance bone = createBoneAppearance();
+    static Appearance stoneGrey = createStoneGreyAppearance();
 
     
     static Appearance walls = set_Appearance("wall3");
@@ -1128,8 +1171,9 @@ public class GameObjects {
         BranchGroup dinoExhibit = new BranchGroup();
 
         // Load T-Rex
-        BranchGroup tRex = ObjectLoader.loadObject("dinosaur/trex.obj", new Vector3f(position.x + 0f, position.y + 0f, position.z + 0f), scale, whitePearl);
+        BranchGroup tRex = ObjectLoader.loadObject("dinosaur/trex.obj", new Vector3f(position.x, position.y + 0.1f, position.z), scale, bone);
 
+        // Set up pivot for the pterodactyl
         Transform3D pivotPosition = new Transform3D();
         pivotPosition.setTranslation(new Vector3f(-1f, position.y + 0.75f, -4f));
         TransformGroup pivotTG = new TransformGroup(pivotPosition);
@@ -1137,40 +1181,54 @@ public class GameObjects {
         TransformGroup pteroSpinTG = new TransformGroup();
         pteroSpinTG.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
 
-        Vector3f offset = new Vector3f(1.5f, 0f, 0f); // ← change this to orbit in any direction
+        Vector3f offset = new Vector3f(1.5f, 0f, 0f); // Orbit direction
 
         Transform3D offsetTransform = new Transform3D();
         offsetTransform.setTranslation(offset);
         TransformGroup offsetTG = new TransformGroup(offsetTransform);
 
-        BranchGroup ptero = ObjectLoader.loadObject("dinosaur/pterodactyl retopo.obj", new Vector3f(0f, 0f, 0f), scale / 2, whitePearl);
+        BranchGroup ptero = ObjectLoader.loadObject("dinosaur/pterodactyl retopo.obj", new Vector3f(0f, 0f, 0f), scale / 2, bone);
         offsetTG.addChild(ptero);
-
         pteroSpinTG.addChild(offsetTG);
 
+        // Rotation behavior for pterodactyl
         Alpha spinAlpha = new Alpha(-1, 10000);
         Transform3D yAxis = new Transform3D();
-        RotationInterpolator rotator = new RotationInterpolator(spinAlpha, pteroSpinTG, yAxis,(float)(2 * Math.PI), 0.0f);
+        RotationInterpolator rotator = new RotationInterpolator(spinAlpha, pteroSpinTG, yAxis, (float)(2 * Math.PI), 0.0f);
         rotator.setSchedulingBounds(new BoundingSphere(new Point3d(), 100.0));
         pteroSpinTG.addChild(rotator);
 
-        pivotTG.addChild(pteroSpinTG);
+        pivotTG.addChild(pteroSpinTG); // Add animated pterodactyl to pivot
 
+        float boxSize = 0.75f;
+        float boxHeight = 0.2f; // Thicker box along Y axis (total height = 0.3)
+        Box footBox = new Box(boxSize, boxHeight, boxSize, stoneGrey);
+
+        Transform3D boxTransform = new Transform3D();
+        boxTransform.setTranslation(new Vector3f(position.x, position.y - 0.3f - boxHeight, position.z));
+        TransformGroup boxTG = new TransformGroup(boxTransform);
+        boxTG.addChild(footBox);
+
+        // Add everything to the scene graph
         if (rotationAngle != 0) {
             Transform3D rotationTransform = new Transform3D();
-            rotationTransform.setRotation(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(rotationAngle)));
+            rotationTransform.setRotation(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float)Math.toRadians(rotationAngle)));
             TransformGroup rotationGroup = new TransformGroup(rotationTransform);
 
             rotationGroup.addChild(tRex);
+            rotationGroup.addChild(boxTG);
             rotationGroup.addChild(pivotTG);
+
             dinoExhibit.addChild(rotationGroup);
         } else {
             dinoExhibit.addChild(tRex);
+            dinoExhibit.addChild(boxTG);
             dinoExhibit.addChild(pivotTG);
         }
 
         return dinoExhibit;
     }
+
 
 
     
