@@ -1124,6 +1124,56 @@ public class GameObjects {
     
     }
     
+    public static BranchGroup createDinoRoom(Vector3f position, float scale, float rotationAngle) {
+        BranchGroup dinoExhibit = new BranchGroup();
+
+        // Load T-Rex
+        BranchGroup tRex = ObjectLoader.loadObject("dinosaur/trex.obj", new Vector3f(position.x + 0f, position.y + 0f, position.z + 0f), scale, whitePearl);
+
+        Transform3D pivotPosition = new Transform3D();
+        pivotPosition.setTranslation(new Vector3f(-1f, position.y + 0.75f, -4f));
+        TransformGroup pivotTG = new TransformGroup(pivotPosition);
+
+        TransformGroup pteroSpinTG = new TransformGroup();
+        pteroSpinTG.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+
+        Vector3f offset = new Vector3f(1.5f, 0f, 0f); // ← change this to orbit in any direction
+
+        Transform3D offsetTransform = new Transform3D();
+        offsetTransform.setTranslation(offset);
+        TransformGroup offsetTG = new TransformGroup(offsetTransform);
+
+        BranchGroup ptero = ObjectLoader.loadObject("dinosaur/pterodactyl retopo.obj", new Vector3f(0f, 0f, 0f), scale / 2, whitePearl);
+        offsetTG.addChild(ptero);
+
+        pteroSpinTG.addChild(offsetTG);
+
+        Alpha spinAlpha = new Alpha(-1, 10000);
+        Transform3D yAxis = new Transform3D();
+        RotationInterpolator rotator = new RotationInterpolator(spinAlpha, pteroSpinTG, yAxis,(float)(2 * Math.PI), 0.0f);
+        rotator.setSchedulingBounds(new BoundingSphere(new Point3d(), 100.0));
+        pteroSpinTG.addChild(rotator);
+
+        pivotTG.addChild(pteroSpinTG);
+
+        if (rotationAngle != 0) {
+            Transform3D rotationTransform = new Transform3D();
+            rotationTransform.setRotation(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(rotationAngle)));
+            TransformGroup rotationGroup = new TransformGroup(rotationTransform);
+
+            rotationGroup.addChild(tRex);
+            rotationGroup.addChild(pivotTG);
+            dinoExhibit.addChild(rotationGroup);
+        } else {
+            dinoExhibit.addChild(tRex);
+            dinoExhibit.addChild(pivotTG);
+        }
+
+        return dinoExhibit;
+    }
+
+
+    
     
     
 	public static ArrayList<BoundingBox> getWallBoundingBoxes() {

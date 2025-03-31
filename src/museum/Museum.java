@@ -52,6 +52,17 @@ public class Museum extends JPanel {
         // Corrected instantiation with walls
         movement = new Movement(this, camera, centerPoint, walls);
         
+        ArrayList<TriggerZone> triggers = new ArrayList<>();
+
+	     BoundingBox dinoRoomBox = new BoundingBox(1f, 2f, 4f, 2f);
+	     triggers.add(new TriggerZone("dinoRoom", dinoRoomBox, "Jurassic Park"));
+	
+	     movement.setTriggerZones(triggers);
+	
+	     // Load the sound
+	     SoundPlayer.getInstance().loadSound("Jurassic Park", "sounds/Jurassic Park.wav");
+
+        
         // Add key listener as before
         canvas.addKeyListener(movement);
         
@@ -96,13 +107,18 @@ public class Museum extends JPanel {
         
         sceneBG.addChild(Window.createWindowElements());
         
+        sceneBG.addChild(GameObjects.createDinoRoom(new Vector3f(-1f, 0.475f, -4f), 1f, 180f));
 
+        
         
         BranchGroup ticketRoom = TicketRoom.createTicketRoom(canvas);
         BranchGroup spaceRoom = SpaceRoom.createSpaceRoom();
+        BranchGroup medievalRoom = MedievalRoom.createMedievalRoom();
+        BranchGroup vikingRoom = VikingRoom.createVikingRoom();
+        sceneBG.addChild(vikingRoom);
         sceneBG.addChild(ticketRoom);
         sceneBG.addChild(spaceRoom);
-
+        sceneBG.addChild(medievalRoom);
         
         // Add lighting to the scene
         addLighting(sceneBG);

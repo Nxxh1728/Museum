@@ -61,11 +61,6 @@ public class TicketRoom {
         ticketRoomGroup.setCapability(BranchGroup.ALLOW_PICKABLE_WRITE);
         
         
-        
-        
-        soundPlayer.playSound(LOBBY_SOUND, true);
-        soundPlayer.setSoundVolume(LOBBY_SOUND, 0.3f);
-
         // Add the plant to the ticket room
         ticketRoomGroup.addChild(createPlant(new Vector3f(3.4f, 0.425f, -1.5f)));
         ticketRoomGroup.addChild(createPlant(new Vector3f(4.6f, 0.425f, -1.5f)));

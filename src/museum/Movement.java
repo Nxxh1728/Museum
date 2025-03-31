@@ -53,6 +53,13 @@ public class Movement implements KeyListener, MouseListener, MouseMotionListener
         this.direction = 0;
         this.walls = walls;
     }
+    
+    private ArrayList<TriggerZone> triggerZones = new ArrayList<>();
+
+    public void setTriggerZones(ArrayList<TriggerZone> zones) {
+        this.triggerZones = zones;
+    }
+
 
     private void updateJump() {
         if (isJumping) {
@@ -113,6 +120,11 @@ public class Movement implements KeyListener, MouseListener, MouseMotionListener
             updateLookDirection();
             museum.updateViewer();
         }
+        
+        for (TriggerZone zone : triggerZones) {
+            zone.checkTrigger(camera.x, camera.z);
+        }
+
     }
 
     private boolean isColliding(double x, double z) {
@@ -272,6 +284,16 @@ public class Movement implements KeyListener, MouseListener, MouseMotionListener
             case KeyEvent.VK_SPACE: // Jump with space bar
                 jump();
                 break;
+            case KeyEvent.VK_P:
+            	if(SpaceRoom.sunMorphNode != null) {
+            		double[] weights = SpaceRoom.sunMorphNode.getWeights();
+            		if (weights[0] >= 1.0f) {
+            			SpaceRoom.sunMorphNode.setWeights(new double[] {0.0, 1.0});
+            		} else {
+            			SpaceRoom.sunMorphNode.setWeights(new double[] {1.0, 0.0});
+            		}
+            	}
+            	break;
         }
     }
 
