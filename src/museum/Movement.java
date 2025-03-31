@@ -267,6 +267,16 @@ public class Movement implements KeyListener, MouseListener, MouseMotionListener
             case KeyEvent.VK_SPACE: // Jump with space bar
                 jump();
                 break;
+            case KeyEvent.VK_P:
+            	if(SpaceRoom.sunMorphNode != null) {
+            		double[] weights = SpaceRoom.sunMorphNode.getWeights();
+            		if (weights[0] >= 1.0f) {
+            			SpaceRoom.sunMorphNode.setWeights(new double[] {0.0, 1.0});
+            		} else {
+            			SpaceRoom.sunMorphNode.setWeights(new double[] {1.0, 0.0});
+            		}
+            	}
+            	break;
         }
     }
 
