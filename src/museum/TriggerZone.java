@@ -4,13 +4,13 @@ import java.util.Iterator;
 import org.jogamp.java3d.*;
 import org.jogamp.vecmath.Point3d;
 
-public class DinoRoomCollisionBehavior extends Behavior {
+public class TriggerZone extends Behavior {
     private Node target;
     private WakeupOnCollisionEntry wEnter;
     private WakeupOnCollisionExit wExit;
     private boolean soundPlaying = false;
 
-    public DinoRoomCollisionBehavior(Node node) {
+    public TriggerZone(Node node) {
         this.target = node;
         setSchedulingBounds(new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 0.5));
     }

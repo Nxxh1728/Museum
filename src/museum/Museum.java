@@ -11,7 +11,9 @@ import org.jogamp.java3d.utils.image.TextureLoader;
 import org.jogamp.java3d.utils.universe.*;
 import org.jogamp.vecmath.*;
 
+
 import org.jogamp.java3d.utils.geometry.Box;
+import org.jdesktop.j3d.examples.morphing.MorphingBehavior;
 
 public class Museum extends JPanel {
 	
@@ -34,6 +36,42 @@ public class Museum extends JPanel {
     public TransformGroup playerCubeTG;
    
     public final static Color3f White = new Color3f(1.0f, 1.0f, 1.0f);
+    private static Switch[] morphSwitch = new Switch[4];
+    
+
+    private static Switch morph_Switch(int i, TransformGroup priorTG, String s, Switch[] morph) {
+        morph[i] = new Switch();
+        morph[i].setCapability(Switch.ALLOW_SWITCH_WRITE);
+
+        int[][] intervals = {
+        	{4, 64, 8},   
+            {8, 32, 16},
+            {16, 64, 32},
+            {32, 4, 64}  
+        };
+
+        for (int j = 0; j < 4; j++) { 
+            morph[i].addChild(MorphPic.set_Morph(priorTG, s, intervals[j][0],intervals[j][1], intervals[j][2]));
+        }
+
+        morph[i].setWhichChild(0);
+        return morph[i];
+    }
+    
+    public static void morph_Shapes(TransformGroup sceneTG, Switch[] morph) {
+        String[] side_name = {"Top"};
+
+        TransformGroup picTG = new TransformGroup();
+        picTG.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        Transform3D picTransform = new Transform3D();
+        picTransform.setTranslation(new Vector3f(4f, 1f, -1.89f));
+        picTG.setTransform(picTransform);
+        
+        
+        morphSwitch[1] = morph_Switch(1, sceneTG, side_name[0], morph);
+        picTG.addChild(morphSwitch[1]);
+        sceneTG.addChild(picTG);
+    }
 
     public Museum() {
     	instance = this;
@@ -122,7 +160,7 @@ public class Museum extends JPanel {
         this.playerCube = playerBox.getShape(Box.FRONT); 
 
 
-        DinoRoomCollisionBehavior collisionBehavior = new DinoRoomCollisionBehavior(dinoTG);
+        TriggerZone collisionBehavior = new TriggerZone(dinoTG);
         dinoTG.addChild(collisionBehavior);
         
         SoundPlayer.getInstance().loadSound("Jurassic Park", "sounds/Jurassic Park.wav");
@@ -135,8 +173,12 @@ public class Museum extends JPanel {
         sceneBG.addChild(ticketRoom);
         sceneBG.addChild(spaceRoom);
         sceneBG.addChild(medievalRoom);
-
         
+        
+        TransformGroup picTG = new TransformGroup();
+        
+        morph_Shapes(picTG, morphSwitch);
+        sceneBG.addChild(picTG);
         // Add lighting to the scene
         addLighting(sceneBG);
 
