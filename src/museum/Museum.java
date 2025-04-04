@@ -11,6 +11,8 @@ import org.jogamp.java3d.utils.image.TextureLoader;
 import org.jogamp.java3d.utils.universe.*;
 import org.jogamp.vecmath.*;
 
+import org.jogamp.java3d.utils.geometry.Box;
+
 public class Museum extends JPanel {
 	
 	private static Museum instance;
@@ -26,6 +28,10 @@ public class Museum extends JPanel {
     private Point3d camera = new Point3d(3.75, .35, -1); 
     private Point3d centerPoint = new Point3d(5, .35, -1); 
     private Vector3d upDir = new Vector3d(0, 1, 0);
+    
+    public Shape3D dinoCube;
+    public Shape3D playerCube;
+    public TransformGroup playerCubeTG;
    
     public final static Color3f White = new Color3f(1.0f, 1.0f, 1.0f);
 
@@ -51,17 +57,6 @@ public class Museum extends JPanel {
         
         // Corrected instantiation with walls
         movement = new Movement(this, camera, centerPoint, walls);
-        
-        ArrayList<TriggerZone> triggers = new ArrayList<>();
-
-	     BoundingBox dinoRoomBox = new BoundingBox(1f, 2f, 4f, 2f);
-	     triggers.add(new TriggerZone("dinoRoom", dinoRoomBox, "Jurassic Park"));
-	
-	     movement.setTriggerZones(triggers);
-	
-	     // Load the sound
-	     SoundPlayer.getInstance().loadSound("Jurassic Park", "sounds/Jurassic Park.wav");
-
         
         // Add key listener as before
         canvas.addKeyListener(movement);
@@ -108,9 +103,30 @@ public class Museum extends JPanel {
         sceneBG.addChild(Window.createWindowElements());
         
         sceneBG.addChild(GameObjects.createDinoRoom(new Vector3f(-1f, 0.475f, -4f), 1f, 180f));
+        
+        Box dinoBox = new Box(0.2f, 0.2f, 0.2f, GameObjects.createInvisibleAppearance());
+        TransformGroup dinoTG = new TransformGroup();
+        dinoTG.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        Transform3D dinoTransform = new Transform3D();
+        dinoTransform.setTranslation(new Vector3f(0.5f, 0.4f, 2f));
+        dinoTG.setTransform(dinoTransform);
+        dinoTG.addChild(dinoBox);
+        sceneBG.addChild(dinoTG);
 
+        Box playerBox = new Box(0.2f, 0.2f, 0.2f, GameObjects.createInvisibleAppearance());
+        playerCubeTG = new TransformGroup();
+        playerCubeTG.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        playerCubeTG.addChild(playerBox);
+        sceneBG.addChild(playerCubeTG);
+
+        this.playerCube = playerBox.getShape(Box.FRONT); 
+
+
+        DinoRoomCollisionBehavior collisionBehavior = new DinoRoomCollisionBehavior(dinoTG);
+        dinoTG.addChild(collisionBehavior);
         
-        
+        SoundPlayer.getInstance().loadSound("Jurassic Park", "sounds/Jurassic Park.wav");
+
         BranchGroup ticketRoom = TicketRoom.createTicketRoom(canvas);
         BranchGroup spaceRoom = SpaceRoom.createSpaceRoom();
         BranchGroup medievalRoom = MedievalRoom.createMedievalRoom();
@@ -119,6 +135,7 @@ public class Museum extends JPanel {
         sceneBG.addChild(ticketRoom);
         sceneBG.addChild(spaceRoom);
         sceneBG.addChild(medievalRoom);
+
         
         // Add lighting to the scene
         addLighting(sceneBG);

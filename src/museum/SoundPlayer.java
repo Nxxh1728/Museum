@@ -62,18 +62,18 @@ public class SoundPlayer {
             soundLooping.put(soundName, false);
             soundPositions.put(soundName, new float[]{0f, 0f, 0f});
             
-            // Clean up - some JOAL versions use different method names
+
             try {
-                // Try the most common method first
-                ALut.class.getMethod("alutUnloadWAV", int.class, ByteBuffer.class, int.class, int.class)
+
+            	ALut.class.getMethod("alutUnloadWAVFile", int.class, ByteBuffer.class, int.class, int.class)
                     .invoke(null, format[0], data[0], size[0], freq[0]);
             } catch (Exception e) {
-                // Fallback to alternative method names if needed
+            	
                 try {
                     ALut.class.getMethod("alutUnloadWAVFile", int.class, ByteBuffer.class, int.class, int.class)
                         .invoke(null, format[0], data[0], size[0], freq[0]);
                 } catch (Exception ex) {
-                    System.err.println("Could not find WAV unloading method");
+                    
                 }
             }
             
@@ -127,15 +127,5 @@ public class SoundPlayer {
         soundLooping.clear();
         soundPositions.clear();
         ALut.alutExit();
-    }
-
-    public boolean isPlaying(String soundName) {
-        Integer source = soundSources.get(soundName);
-        if (source != null) {
-            int[] state = new int[1];
-            al.alGetSourcei(source, AL.AL_SOURCE_STATE, state, 0);
-            return state[0] == AL.AL_PLAYING;
-        }
-        return false;
     }
 }

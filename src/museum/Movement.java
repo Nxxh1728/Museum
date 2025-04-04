@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+
+import org.jogamp.java3d.Transform3D;
 import org.jogamp.vecmath.*;
 
 public class Movement implements KeyListener, MouseListener, MouseMotionListener, Runnable {
@@ -52,12 +54,6 @@ public class Movement implements KeyListener, MouseListener, MouseMotionListener
         this.centerPoint = centerPoint;
         this.direction = 0;
         this.walls = walls;
-    }
-    
-    private ArrayList<TriggerZone> triggerZones = new ArrayList<>();
-
-    public void setTriggerZones(ArrayList<TriggerZone> zones) {
-        this.triggerZones = zones;
     }
 
 
@@ -113,16 +109,18 @@ public class Movement implements KeyListener, MouseListener, MouseMotionListener
 
         double newCamX = camera.x + zAxis * dx - xAxis * dz;
         double newCamZ = camera.z + zAxis * dz + xAxis * dx;
+        
+        Vector3f playerPos = new Vector3f((float) camera.x, 0.3f, (float) camera.z);
+        Transform3D transform = new Transform3D();
+        transform.setTranslation(playerPos);
+        Museum.getInstance().playerCubeTG.setTransform(transform);
+
 
         if (!isColliding(newCamX, newCamZ)) {
             camera.x = newCamX;
             camera.z = newCamZ;
             updateLookDirection();
             museum.updateViewer();
-        }
-        
-        for (TriggerZone zone : triggerZones) {
-            zone.checkTrigger(camera.x, camera.z);
         }
 
     }

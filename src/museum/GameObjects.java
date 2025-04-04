@@ -1201,7 +1201,7 @@ public class GameObjects {
         pivotTG.addChild(pteroSpinTG); // Add animated pterodactyl to pivot
 
         float boxSize = 0.75f;
-        float boxHeight = 0.2f; // Thicker box along Y axis (total height = 0.3)
+        float boxHeight = 0.2f; 
         Box footBox = new Box(boxSize, boxHeight, boxSize, stoneGrey);
 
         Transform3D boxTransform = new Transform3D();
@@ -1231,7 +1231,13 @@ public class GameObjects {
 
 
 
-    
+    public static Appearance createInvisibleAppearance() {
+        Appearance app = new Appearance();
+        TransparencyAttributes ta = new TransparencyAttributes(TransparencyAttributes.SCREEN_DOOR, 1f); 
+        app.setTransparencyAttributes(ta);
+        return app;
+    }
+
     
     
 	public static ArrayList<BoundingBox> getWallBoundingBoxes() {

@@ -44,15 +44,16 @@ public class TicketRoom {
         return appearance;
     }
     
-    private static SoundPlayer soundPlayer;
-    private static final String LOBBY_SOUND = "lobby";
+
     
     public static BranchGroup createTicketRoom(Canvas3D canvas) {
         // Initialize sound player if not already done
-        if (soundPlayer == null) {
-            soundPlayer = SoundPlayer.getInstance();
-            soundPlayer.loadSound(LOBBY_SOUND, "sounds/lobby.wav");
-        }      
+        
+       
+       SoundPlayer.getInstance().loadSound("lobby", "sounds/lobby316.wav");
+        
+        
+        SoundPlayer.getInstance().playSound("lobby", true);
     	
     	
     	TicketRoom.canvas = canvas;
@@ -102,6 +103,7 @@ public class TicketRoom {
         textTransform.mul(rotation2);
         textTransformGroup.setTransform(textTransform); 
         textTransformGroup.addChild(createText("Tickets", new Vector3f(-4f, .7f, -0.6f), 0.1f, new Color3f(1f, .9f, 0f)));
+        textTransformGroup.addChild(createText("Click Figure for Ticket", new Vector3f(-4f, .2f, -0.55f), 0.05f, new Color3f(0.8f, .9f, 0.8f)));
         ticketRoomGroup.addChild(textTransformGroup);
         
         
