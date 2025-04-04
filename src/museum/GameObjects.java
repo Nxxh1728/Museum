@@ -19,19 +19,16 @@ public class GameObjects {
     public static Appearance set_Appearance(Color3f color) {
         Appearance app = new Appearance();
         
-        // Set polygon attributes to show both sides
         PolygonAttributes pa = new PolygonAttributes();
-        pa.setCullFace(PolygonAttributes.CULL_NONE); // show both sides
+        pa.setCullFace(PolygonAttributes.CULL_NONE); 
         app.setPolygonAttributes(pa);
 
-        // Create a Material object with the specified color
         Material material = new Material();
         material.setDiffuseColor(color);
-        material.setSpecularColor(new Color3f(0.7f, 0.7f, 0.7f)); // Optional: Set specular color
-        material.setShininess(64.0f); // Optional: Set shininess
-        material.setLightingEnable(true); // Ensure lighting is enabled
+        material.setSpecularColor(new Color3f(0.7f, 0.7f, 0.7f)); 
+        material.setShininess(64.0f); 
+        material.setLightingEnable(true);
 
-        // Enable lighting and set the material
         app.setMaterial(material);
 
         return app;
@@ -40,7 +37,7 @@ public class GameObjects {
     public static Appearance set_Appearance(String s) {
         Appearance app = new Appearance();
         PolygonAttributes pa = new PolygonAttributes();
-        pa.setCullFace(PolygonAttributes.CULL_NONE);       // show both sides
+        pa.setCullFace(PolygonAttributes.CULL_NONE);     
         app.setPolygonAttributes(pa);
 
         TexCoordGeneration tcg = new TexCoordGeneration(TexCoordGeneration.OBJECT_LINEAR,
@@ -52,7 +49,7 @@ public class GameObjects {
         textureAttrib.setTextureMode(TextureAttributes.REPLACE);
         app.setTextureAttributes(textureAttrib);
     
-        float scl = 0.250f;                                  // need to rearrange the four quarters
+        float scl = 0.250f;                                 
         Vector3d scale = new Vector3d(scl, scl, scl);
         Transform3D transMap = new Transform3D();
         transMap.setScale(scale);
@@ -61,20 +58,17 @@ public class GameObjects {
         return app;
     }
     
-    // Add this new method for white pearl appearance
     public static Appearance createWhitePearlAppearance() {
         Appearance app = new Appearance();
         
-        // Set polygon attributes to show both sides
         PolygonAttributes pa = new PolygonAttributes();
         pa.setCullFace(PolygonAttributes.CULL_NONE);
         app.setPolygonAttributes(pa);
 
-        // Create a pearlescent material
         Material material = new Material();
-        material.setDiffuseColor(new Color3f(0.95f, 0.95f, 0.95f)); // Very light gray/white
-        material.setSpecularColor(new Color3f(0.8f, 0.8f, 0.8f));   // Bright white specular
-        material.setShininess(128.0f);                              // High shininess for pearl effect
+        material.setDiffuseColor(new Color3f(0.95f, 0.95f, 0.95f)); 
+        material.setSpecularColor(new Color3f(0.8f, 0.8f, 0.8f));   
+        material.setShininess(128.0f);                              
         material.setLightingEnable(true);
         
         app.setMaterial(material);
@@ -85,16 +79,14 @@ public class GameObjects {
     public static Appearance createBoneAppearance() {
         Appearance app = new Appearance();
         
-        // Set polygon attributes to show both sides
         PolygonAttributes pa = new PolygonAttributes();
         pa.setCullFace(PolygonAttributes.CULL_NONE);
         app.setPolygonAttributes(pa);
 
-        // Create a pearlescent material
         Material material = new Material();
         material.setDiffuseColor(new Color3f(0.75f, 0.69f, 0.58f)); 
-        material.setSpecularColor(new Color3f(0.4f, 0.4f, 0.4f));   // Bright white specular
-        material.setShininess(5.0f);                              // High shininess for pearl effect
+        material.setSpecularColor(new Color3f(0.4f, 0.4f, 0.4f));   
+        material.setShininess(5.0f);                              
         material.setLightingEnable(true);
         
         app.setMaterial(material);
@@ -105,17 +97,15 @@ public class GameObjects {
     public static Appearance createMaroonRoughAppearance() {
         Appearance app = new Appearance();
         
-        // Set polygon attributes to show both sides
         PolygonAttributes pa = new PolygonAttributes();
         pa.setCullFace(PolygonAttributes.CULL_NONE);
         app.setPolygonAttributes(pa);
 
-        // Create a rough material (low shininess)
         Material material = new Material();
         material.setDiffuseColor(new Color3f(0.3f, 0.1f, 0.1f));    // Maroon color
-        material.setAmbientColor(new Color3f(0.3f, 0.05f, 0.05f));  // Darker maroon for ambient
-        material.setSpecularColor(new Color3f(0.3f, 0.1f, 0.1f));   // Dark red specular
-        material.setShininess(5.0f);                               // Low shininess for rough look
+        material.setAmbientColor(new Color3f(0.3f, 0.05f, 0.05f));  
+        material.setSpecularColor(new Color3f(0.3f, 0.1f, 0.1f));  
+        material.setShininess(5.0f);                               
         material.setLightingEnable(true);
         
         app.setMaterial(material);
@@ -126,12 +116,10 @@ public class GameObjects {
     public static Appearance createStoneGreyAppearance() {
         Appearance app = new Appearance();
         
-        // Set polygon attributes to show both sides
         PolygonAttributes pa = new PolygonAttributes();
         pa.setCullFace(PolygonAttributes.CULL_NONE);
         app.setPolygonAttributes(pa);
 
-        // Create a rough material (low shininess)
         Material material = new Material();
         material.setDiffuseColor(new Color3f(0.4f, 0.4f, 0.4f));  
         material.setAmbientColor(new Color3f(0.1f, 0.1f, 0.1f)); 
@@ -144,15 +132,15 @@ public class GameObjects {
         return app;
     }
     private static Texture2D texture_Appearance(String f_name) {
-        String file_name = "images/" + f_name + ".jpg";    // indicate the location of the image
+        String file_name = "images/" + f_name + ".jpg";    
         TextureLoader loader = new TextureLoader(file_name, null);
-        ImageComponent2D image = loader.getImage();        // get the image
+        ImageComponent2D image = loader.getImage();     
         if (image == null)
             System.out.println("Cannot load file: " + file_name);
 
         Texture2D texture = new Texture2D(Texture2D.BASE_LEVEL,
                 Texture2D.RGBA, image.getWidth(), image.getHeight());
-        texture.setImage(0, image);                        // define the texture with the image
+        texture.setImage(0, image);                      
 
         return texture;
     }
@@ -160,7 +148,7 @@ public class GameObjects {
     static Color3f palePurple = new Color3f(0.7f, 0.6f, 1.0f);
     static Color3f White = new Color3f(1f, 1f, 1.0f);
 
-    // Create the white pearl appearance as a static field
+ 
     static Appearance whitePearl = createWhitePearlAppearance();
     static Appearance maroonRough = createMaroonRoughAppearance();
     static Appearance bone = createBoneAppearance();
@@ -171,7 +159,7 @@ public class GameObjects {
     static Appearance floor = set_Appearance("floor2");
     static Appearance white = set_Appearance(White);
     
-    // Helper function to create a wall
+    //  function to create a wall
     public static TransformGroup createWall(Vector3f position, Vector3f size, Appearance appearance) {
         TransformGroup wallGroup = new TransformGroup();
         Transform3D transform = new Transform3D();
@@ -182,7 +170,7 @@ public class GameObjects {
         return wallGroup;
     }
 
-    // Helper function to create a floor section
+    //  function to create a floor section
     private static TransformGroup createFloorSection(Vector3f position, Vector3f size, Appearance appearance) {
         TransformGroup floorGroup = new TransformGroup();
         Transform3D transform = new Transform3D();
@@ -282,7 +270,7 @@ public class GameObjects {
         walltg.addChild(createWall(new Vector3f(-1f, 1f, 4.0f), new Vector3f(0.1f, 1f, 2f), walls));
 
         
-     // Create and add multiple doors with custom rotations
+ 
         Vector3f[] doorPositions = {
             new Vector3f(0.5f, 0f, -1.8f), // Position 1
             new Vector3f(-2.5f, 0f, -1.8f), // Position 2
@@ -297,8 +285,8 @@ public class GameObjects {
             new Vector3f(0f, 0f, 3.2f),
         };
 
-        float[] doorRotations = { 0, 0, 180, 180, 270, 0, 0, 180, 180, 90}; // Rotation angles for each door (in degrees)
-        float doorScale = 1f; // Adjust scale as needed
+        float[] doorRotations = { 0, 0, 180, 180, 270, 0, 0, 180, 180, 90}; 
+        float doorScale = 1f; 
 
         for (int i = 0; i < doorPositions.length; i++) {
             BranchGroup door = createDoor(doorPositions[i], doorScale, doorRotations[i]);

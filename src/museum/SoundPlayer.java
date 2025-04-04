@@ -43,20 +43,16 @@ public class SoundPlayer {
             int[] freq = new int[1];
             int[] loop = new int[1];
 
-            // Load WAV file
             ALut.alutLoadWAVFile(filePath, format, data, size, freq, loop);
             
-            // Generate buffer
             int[] buffer = new int[1];
             al.alGenBuffers(1, buffer, 0);
             al.alBufferData(buffer[0], format[0], data[0], size[0], freq[0]);
             
-            // Generate source
             int[] source = new int[1];
             al.alGenSources(1, source, 0);
             al.alSourcei(source[0], AL.AL_BUFFER, buffer[0]);
             
-            // Store references
             soundBuffers.put(soundName, buffer[0]);
             soundSources.put(soundName, source[0]);
             soundLooping.put(soundName, false);

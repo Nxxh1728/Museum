@@ -11,12 +11,10 @@ import java.io.FileNotFoundException;
 
 public class ObjectLoader {
 
-    // Original method remains for backward compatibility
     public static BranchGroup loadObject(String fileName, Vector3f position, float scale) {
         return loadObject(fileName, position, scale, null);
     }
 
-    // Updated method with Appearance parameter
     public static BranchGroup loadObject(String fileName, Vector3f position, float scale, Appearance appearance) {
         BranchGroup objectGroup = new BranchGroup();
         objectGroup.setCapability(BranchGroup.ALLOW_CHILDREN_EXTEND);
@@ -43,7 +41,6 @@ public class ObjectLoader {
         if (scene != null) {
             BranchGroup loadedObject = scene.getSceneGroup();
             
-            // Apply custom appearance if provided
             if (appearance != null) {
                 setAppearance(loadedObject, appearance);
             }
@@ -62,7 +59,6 @@ public class ObjectLoader {
         return objectGroup;
     }
 
-    // Helper method to recursively set appearance on all Shape3D nodes
     private static void setAppearance(Node node, Appearance appearance) {
         if (node instanceof Shape3D) {
             ((Shape3D) node).setAppearance(appearance);

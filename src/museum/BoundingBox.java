@@ -5,7 +5,7 @@ public class BoundingBox {
     private double centerX, centerZ, radius;
     private boolean isCylindrical;
 
-    // Constructor for rectangular bounds
+    // rectangular bounds
     public BoundingBox(double x, double width, double z, double depth) {
         this.minX = x - width;
         this.maxX = x + width;
@@ -14,7 +14,7 @@ public class BoundingBox {
         this.isCylindrical = false;
     }
 
-    // Constructor for cylindrical bounds
+    // cylindrical bounds
     public BoundingBox(double x, double z, double radius) {
         this.centerX = x;
         this.centerZ = z;
@@ -24,12 +24,12 @@ public class BoundingBox {
 
     public boolean contains(double x, double z) {
         if (isCylindrical) {
-            // Check if the point is within the circle
+            
             double dx = x - centerX;
             double dz = z - centerZ;
             return (dx * dx + dz * dz) <= (radius * radius);
         } else {
-            // Check if the point is within the rectangle
+           
             return x >= minX && x <= maxX && z >= minZ && z <= maxZ;
         }
     }

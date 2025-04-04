@@ -179,7 +179,7 @@ public class Museum extends JPanel {
         
         morph_Shapes(picTG, morphSwitch);
         sceneBG.addChild(picTG);
-        // Add lighting to the scene
+        
         addLighting(sceneBG);
 
         return sceneBG;
@@ -189,12 +189,12 @@ public class Museum extends JPanel {
     private void addLighting(BranchGroup sceneBG) {
         BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 100.0);
 
-        // Increase ambient light brightness slightly
+        
         AmbientLight ambientLight = new AmbientLight(new Color3f(0.9f, 0.9f, 0.9f)); 
         ambientLight.setInfluencingBounds(bounds);
         sceneBG.addChild(ambientLight);
 
-        // Brighter directional light for overall visibility
+        
         DirectionalLight directionalLight = new DirectionalLight(
             new Color3f(0.8f, 0.8f, 0.8f), // Soft but strong light
             new Vector3f(-.4f, -1.2f, -1.f) // Slightly adjusted angle for depth
@@ -203,13 +203,12 @@ public class Museum extends JPanel {
         sceneBG.addChild(directionalLight);
         
         DirectionalLight directionalLight2 = new DirectionalLight(
-                new Color3f(.8f, .8f, .8f), // Color of the light
-                new Vector3f(1.1f, .8f, 1.5f) // Direction of the light
+                new Color3f(.8f, .8f, .8f),
+                new Vector3f(1.1f, .8f, 1.5f) 
             );
         directionalLight2.setInfluencingBounds(bounds);
         sceneBG.addChild(directionalLight2);
 
-        // Stronger warm spotlights to highlight objects
         addSpotlight(sceneBG, new Point3f(3f, 3f, 3f), new Vector3f(-0.5f, -1.0f, -0.5f), 2f);
         addSpotlight(sceneBG, new Point3f(-3f, 3f, -3f), new Vector3f(0.5f, -1.0f, 0.5f), 2f);
         addSpotlight(sceneBG, new Point3f(3f, -3f, 3f), new Vector3f(-0.5f, -1.0f, -0.5f), 2f);
@@ -225,10 +224,10 @@ public class Museum extends JPanel {
         SpotLight spotlight = new SpotLight();
         spotlight.setColor(new Color3f(0.9f * intensity, 0.8f * intensity, 0.7f * intensity)); // Brighter warm tone
         spotlight.setPosition(position);
-        spotlight.setAttenuation(1.0f, 0.01f, 0.01f); // Softer falloff
+        spotlight.setAttenuation(1.0f, 0.01f, 0.01f);
         spotlight.setDirection(direction);
-        spotlight.setSpreadAngle((float) Math.toRadians(50)); // Wider beam
-        spotlight.setConcentration(10.0f); // Softer edges
+        spotlight.setSpreadAngle((float) Math.toRadians(50)); 
+        spotlight.setConcentration(10.0f); 
         spotlight.setInfluencingBounds(bounds);
 
         sceneBG.addChild(spotlight);

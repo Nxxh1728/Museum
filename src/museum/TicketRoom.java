@@ -29,10 +29,9 @@ public class TicketRoom {
         Appearance appearance = new Appearance();
         Color3f color = new Color3f(1.0f, 0.0f, 0.0f);
         
-        // Create transparent material
         TransparencyAttributes transparency = new TransparencyAttributes();
         transparency.setTransparencyMode(TransparencyAttributes.BLENDED);
-        transparency.setTransparency(1f); // 75% transparent
+        transparency.setTransparency(1f);
         
         Material material = new Material();
         material.setDiffuseColor(color);
@@ -44,37 +43,24 @@ public class TicketRoom {
         return appearance;
     }
     
-
-    
     public static BranchGroup createTicketRoom(Canvas3D canvas) {
-        // Initialize sound player if not already done
-        
-       
        SoundPlayer.getInstance().loadSound("lobby", "sounds/lobby316.wav");
-        
-        
-        SoundPlayer.getInstance().playSound("lobby", true);
-    	
+       SoundPlayer.getInstance().playSound("lobby", true);
     	
     	TicketRoom.canvas = canvas;
         BranchGroup ticketRoomGroup = new BranchGroup();
         ticketRoomGroup.setCapability(BranchGroup.ALLOW_PICKABLE_READ);
         ticketRoomGroup.setCapability(BranchGroup.ALLOW_PICKABLE_WRITE);
         
-        
-        // Add the plant to the ticket room
         ticketRoomGroup.addChild(createPlant(new Vector3f(3.4f, 0.425f, -1.5f)));
         ticketRoomGroup.addChild(createPlant(new Vector3f(4.6f, 0.425f, -1.5f)));
-       
 
-        // Create the doors
         door1TG = createDoor(new Vector3f(-0.2f, 0.35f, 3f), 90);
         door2TG = createDoor(new Vector3f(-0.2f, 0.35f, -3f), 270);
         
-        ticketRoomGroup.addChild(door1TG); //left
-        ticketRoomGroup.addChild(door2TG); // right
+        ticketRoomGroup.addChild(door1TG);
+        ticketRoomGroup.addChild(door2TG);
 
-        // Create booth
         TransformGroup boothTransformGroup = new TransformGroup();
         boothTransformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         Transform3D boothTransform = new Transform3D();
@@ -86,14 +72,11 @@ public class TicketRoom {
         boothTransformGroup.addChild(booth(new Vector3f(-1f, .5f, 4f))); 
         ticketRoomGroup.addChild(boothTransformGroup);
         
-        // Create and add the button
         TransformGroup buttonTG = createBox(new Vector3f(4f, 0.25f, 1f), buttonAppearance);
         ticketRoomGroup.addChild(buttonTG);
         
-        // Setup picking for the button
         setupButtonPicking(canvas, ticketRoomGroup);
                     
-        // Create text
         TransformGroup textTransformGroup = new TransformGroup();
         textTransformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         Transform3D textTransform = new Transform3D();
@@ -123,26 +106,21 @@ public class TicketRoom {
         hostTransformGroup.addChild(host(new Vector3f(-4f, 1f, .35f)));
         ticketRoomGroup.addChild(hostTransformGroup);
        
-        
         return ticketRoomGroup;
     }
 
     public static BranchGroup createPlant(Vector3f pos) {
         float plantScale = 0.25f;
-        float planterScale = .1f; // Adjust this as needed
+        float planterScale = .1f;
         
-        // Create a parent BranchGroup to hold both objects
         BranchGroup group = new BranchGroup();
         
-        // Load and add the palm plant
         Vector3f topPos = new Vector3f(pos.x, pos.y +.2f, pos.z);
         BranchGroup plant1 = ObjectLoader.loadObject("treetop.obj", topPos, plantScale, plant);
         group.addChild(plant1);
         BranchGroup plant2 = ObjectLoader.loadObject("treebottom.obj", pos, plantScale, door1);
         group.addChild(plant2);
-        
-        // Load and add the planter (you might want to adjust the position)
-        // For example, offset the planter slightly below the plant
+
         Vector3f planterPos = new Vector3f(pos.x-0.03f, pos.y-.25f, pos.z+0.02f);
         BranchGroup planter = ObjectLoader.loadObject("planter.obj", planterPos, planterScale, booth);
         group.addChild(planter);
@@ -154,22 +132,20 @@ public class TicketRoom {
 
     public static BranchGroup booth(Vector3f pos) {
         float boothsc = 0.5f;
-
         return ObjectLoader.loadObject("ticket_booth2.obj", pos, boothsc, booth);
     }
+    
     public static Appearance boothAppearance() {
         Appearance app = new Appearance();
         
-        // Set polygon attributes to show both sides
         PolygonAttributes pa = new PolygonAttributes();
         pa.setCullFace(PolygonAttributes.CULL_NONE);
         app.setPolygonAttributes(pa);
 
-        // Create a pearlescent material
         Material material = new Material();
-        material.setDiffuseColor(new Color3f(0.55f, 0.27f, 0.07f)); // Brown color
+        material.setDiffuseColor(new Color3f(0.55f, 0.27f, 0.07f));
         material.setSpecularColor(new Color3f(0.1f, 0.1f, 0.1f));
-        material.setShininess(10.0f);                              // High shininess for pearl effect
+        material.setShininess(10.0f);
         material.setLightingEnable(true);
         
         app.setMaterial(material);
@@ -183,16 +159,14 @@ public class TicketRoom {
     public static Appearance doorAppearance() {
         Appearance app = new Appearance();
         
-        // Set polygon attributes to show both sides
         PolygonAttributes pa = new PolygonAttributes();
         pa.setCullFace(PolygonAttributes.CULL_NONE);
         app.setPolygonAttributes(pa);
 
-        // Create a pearlescent material
         Material material = new Material();
-        material.setDiffuseColor(new Color3f(0.22f, 0.11f, 0.03f)); // Brown color
+        material.setDiffuseColor(new Color3f(0.22f, 0.11f, 0.03f));
         material.setSpecularColor(new Color3f(0.1f, 0.1f, 0.1f));
-        material.setShininess(25.0f);                              // High shininess for pearl effect
+        material.setShininess(25.0f);
         material.setLightingEnable(true);
         
         app.setMaterial(material);
@@ -207,6 +181,7 @@ public class TicketRoom {
         float scale = 0.25f;
         return ObjectLoader.loadObject("man.obj", pos, scale, host);
     }
+    
     static Appearance door1 = doorAppearance();
 
     private static TransformGroup createDoor(Vector3f position, double angleY) {
@@ -274,7 +249,6 @@ public class TicketRoom {
                             
                             Museum.getInstance().updateWalls();
                             
-                            // Rotate doors if not already rotated
                             if (!doorsRotated) {
                                 rotateDoors();
                                 doorsRotated = true;
@@ -292,42 +266,32 @@ public class TicketRoom {
     }
     
     private static void rotateDoors() {
-        // Rotate door1 (left door) 90 degrees clockwise around (3, 0.5)
         Transform3D door1Transform = new Transform3D();
         door1TG.getTransform(door1Transform);
         
-        // Set pivot point for rotation
         Transform3D pivot1 = new Transform3D();
         pivot1.setTranslation(new Vector3f(-2.6f, 0f, -3.4f));
         
-        // Create rotation transform
         Transform3D rotation1 = new Transform3D();
-        rotation1.rotY(Math.PI/2); // 90 degrees clockwise
+        rotation1.rotY(Math.PI/2);
         
-        // Combine transformations
         Transform3D temp1 = new Transform3D();
-        //temp1.setTranslation(new Vector3f(-3f, -0.5f, 0f));
         temp1.mul(rotation1);
         temp1.mul(pivot1);
         
         door1Transform.mul(temp1);
         door1TG.setTransform(door1Transform);
         
-        // Rotate door2 (right door) 90 degrees counter-clockwise around (3, -0.5)
         Transform3D door2Transform = new Transform3D();
         door2TG.getTransform(door2Transform);
         
-        // Set pivot point for rotation
         Transform3D pivot2 = new Transform3D();
         pivot2.setTranslation(new Vector3f(-2.6f, 0f, 3.4f));
         
-        // Create rotation transform
         Transform3D rotation2 = new Transform3D();
-        rotation2.rotY(-Math.PI/2); // 90 degrees counter-clockwise
+        rotation2.rotY(-Math.PI/2);
         
-        // Combine transformations
         Transform3D temp2 = new Transform3D();
-        //temp2.setTranslation(new Vector3f(-3f, 0.5f, 0f));
         temp2.mul(rotation2);
         temp2.mul(pivot2);
         
